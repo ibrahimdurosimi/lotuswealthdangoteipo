@@ -20,7 +20,7 @@ import SubscribeModal from './components/SubscribeModal';
 import ResearchModal from './components/ResearchModal';
 import FAQSection from './components/FAQSection';
 
-export function App() {
+export default function App() {
   // Hero segmented toggle: Individual vs Corporate
   const [accountType, setAccountType] = useState<'individual' | 'corporate'>('individual');
 
@@ -602,53 +602,53 @@ export function App() {
 
           <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none hide-scrollbar gap-6 pb-6 md:pb-0 -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 text-left">
             {/* Step 1 */}
-            <div className="w-[85vw] md:w-auto shrink-0 snap-center md:snap-align-none bg-white rounded-xl shadow-sm border-t-[3px] border-[#C10202] p-6 lg:p-8 flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg">
-              <div className="w-10 h-10 rounded-full bg-red-50 text-[#C10202] font-bold flex items-center justify-center mb-6 text-lg">
+            <div className="w-[85vw] md:w-auto shrink-0 snap-center md:snap-align-none bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-gray-100 border-t-[3px] border-t-[#C10202] p-6 lg:p-8 flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg">
+              <div className="w-12 h-12 rounded-full bg-[#FFF0F0] text-[#C10202] font-bold flex items-center justify-center mb-6 text-lg">
                 1
               </div>
               <h3 className="text-base font-bold text-gray-900 mb-3">
                 Sign Up
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm text-gray-500 leading-relaxed">
                 Create your LOTUS Wealth account in minutes.
               </p>
             </div>
 
             {/* Step 2 */}
-            <div className="w-[85vw] md:w-auto shrink-0 snap-center md:snap-align-none bg-white rounded-xl shadow-sm border-t-[3px] border-[#C10202] p-6 lg:p-8 flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg">
-              <div className="w-10 h-10 rounded-full bg-red-50 text-[#C10202] font-bold flex items-center justify-center mb-6 text-lg">
+            <div className="w-[85vw] md:w-auto shrink-0 snap-center md:snap-align-none bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-gray-100 border-t-[3px] border-t-[#C10202] p-6 lg:p-8 flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg">
+              <div className="w-12 h-12 rounded-full bg-[#FFF0F0] text-[#C10202] font-bold flex items-center justify-center mb-6 text-lg">
                 2
               </div>
               <h3 className="text-base font-bold text-gray-900 mb-3">
                 Open the offer page
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm text-gray-500 leading-relaxed">
                 On Lotus Wealth's dashboard, use the dedicated link to reach the Dangote-IPO offer page.
               </p>
             </div>
 
             {/* Step 3 */}
-            <div className="w-[85vw] md:w-auto shrink-0 snap-center md:snap-align-none bg-white rounded-xl shadow-sm border-t-[3px] border-[#C10202] p-6 lg:p-8 flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg">
-              <div className="w-10 h-10 rounded-full bg-red-50 text-[#C10202] font-bold flex items-center justify-center mb-6 text-lg">
+            <div className="w-[85vw] md:w-auto shrink-0 snap-center md:snap-align-none bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-gray-100 border-t-[3px] border-t-[#C10202] p-6 lg:p-8 flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg">
+              <div className="w-12 h-12 rounded-full bg-[#FFF0F0] text-[#C10202] font-bold flex items-center justify-center mb-6 text-lg">
                 3
               </div>
               <h3 className="text-base font-bold text-gray-900 mb-3">
                 Review the Offer Documents
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm text-gray-500 leading-relaxed">
                 Read the prospectus and other offer materials to understand the investment opportunity and associated risks.
               </p>
             </div>
 
             {/* Step 4 */}
-            <div className="w-[85vw] md:w-auto shrink-0 snap-center md:snap-align-none bg-white rounded-xl shadow-sm border-t-[3px] border-[#C10202] p-6 lg:p-8 flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg">
-              <div className="w-10 h-10 rounded-full bg-red-50 text-[#C10202] font-bold flex items-center justify-center mb-6 text-lg">
+            <div className="w-[85vw] md:w-auto shrink-0 snap-center md:snap-align-none bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-gray-100 border-t-[3px] border-t-[#C10202] p-6 lg:p-8 flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg">
+              <div className="w-12 h-12 rounded-full bg-[#FFF0F0] text-[#C10202] font-bold flex items-center justify-center mb-6 text-lg">
                 4
               </div>
               <h3 className="text-base font-bold text-gray-900 mb-3">
                 Choose Your Shares
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm text-gray-500 leading-relaxed">
                 Select how many shares you'd like to purchase and Submit your application securely through LOTUS Wealth
               </p>
             </div>
@@ -930,5 +930,3 @@ export function App() {
     </div>
   );
 }
-
-export default App;
