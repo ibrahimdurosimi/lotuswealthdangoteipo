@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 120" width="380" height="120" fill="none">
+  <!-- CardinalStone Logo with Navy Emblem & Rising Pillars and Serif Wordmark -->
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&amp;display=swap');
+      .cs-text {
+        font-family: 'Cinzel', 'Times New Roman', 'Baskerville', 'Georgia', serif;
+        font-weight: 700;
+        font-size: 32px;
+        letter-spacing: 3.5px;
+        fill: #0c2044;
+      }
+    </style>
+  </defs>
+
+  <!-- Emblem Disc positioned over STONE section -->
+  <g transform="translate(210, 6)">
+    <!-- Navy circular base -->
+    <circle cx="34" cy="34" r="28" fill="#0c2044" />
+    
+    <!-- 5 Ascending White Bars with diagonal cut tops -->
+    <g fill="#ffffff">
+      <polygon points="17,34 22,31 22,50 17,47" />
+      <polygon points="24,29 29,26 29,56 24,54" />
+      <polygon points="31,24 36,21 36,60 31,59" />
+      <polygon points="38,19 43,16 43,58 38,59" />
+      <polygon points="45,14 50,11 50,51 45,54" />
+    </g>
+  </g>
+
+  <!-- Wordmark CARDINALSTONE in elegant serif -->
+  <text x="16" y="98" class="cs-text">CARDINALSTONE</text>
+</svg>
