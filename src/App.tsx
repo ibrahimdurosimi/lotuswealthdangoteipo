@@ -38,7 +38,6 @@ export default function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Accordion state for new sections
-  const [isNumbersOpen, setIsNumbersOpen] = useState(false);
   const [isAssessmentOpen, setIsAssessmentOpen] = useState(false);
 
   // Carousel refs
@@ -527,45 +526,6 @@ export default function App() {
               </div>
             </div>
           </div>
-
-          {/* Expandable Numbers Section */}
-          <div className="bg-[#F9FAFB] rounded-2xl overflow-hidden transition-all duration-300">
-            <button 
-              onClick={() => setIsNumbersOpen(!isNumbersOpen)}
-              className="w-full flex items-center gap-2 p-6 font-bold text-gray-900 hover:bg-gray-100 transition-colors"
-            >
-              {isNumbersOpen ? (
-                <ChevronUp className="w-4 h-4" />
-              ) : (
-                <ChevronDown className="w-4 h-4" />
-              )}
-              See the numbers behind the deal
-            </button>
-            <div 
-              className={`grid grid-cols-1 md:grid-cols-3 gap-8 px-8 transition-all duration-500 overflow-hidden ${
-                isNumbersOpen ? 'max-h-[800px] pb-8 opacity-100' : 'max-h-0 opacity-0'
-              }`}
-            >
-              <div>
-                <h4 className="font-bold text-sm text-gray-900 mb-2">Priced at a discount</h4>
-                <p className="text-xs text-gray-600 leading-relaxed">
-                  The offer is reported at roughly 8.5x EV/EBITDA, a discount to some global refining peers. A lower entry multiple can offer some valuation support, but it is not a guarantee of future price performance.
-                </p>
-              </div>
-              <div>
-                <h4 className="font-bold text-sm text-gray-900 mb-2">Built to delever</h4>
-                <p className="text-xs text-gray-600 leading-relaxed">
-                  Proceeds are earmarked toward reducing debt. Successful deleveraging could, over time, lower finance costs and strengthen the balance sheet — though this depends on execution.
-                </p>
-              </div>
-              <div>
-                <h4 className="font-bold text-sm text-gray-900 mb-2">Dollar-linked revenue</h4>
-                <p className="text-xs text-gray-600 leading-relaxed">
-                  Regional and export sales offer some exposure to hard-currency income alongside naira revenue, which may provide a degree of resilience to currency swings, though margins remain sensitive to oil prices and regulation.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -860,91 +820,85 @@ export default function App() {
       </div>
 
       {/* ------------------------------------------------------------- */}
-      {/* SECTION: CTA BANNER & FOOTER (COMBINED)                       */}
+      {/* SECTION: FINAL CTA BANNER                                     */}
       {/* ------------------------------------------------------------- */}
-      <section className="bg-[#FAF7F2] pb-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto rounded-[32px] overflow-hidden bg-[#242221] text-white relative shadow-2xl">
-          
+      <section className="bg-[#FAF7F2] py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto rounded-[32px] overflow-hidden bg-[#242221] text-white relative shadow-xl p-8 sm:p-12 lg:p-14 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
           {/* Subtle Red Gradient Background Mesh */}
-          <div className="absolute top-0 right-0 w-[80%] lg:w-1/2 h-[80%] lg:h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#CC4024]/30 via-transparent to-transparent pointer-events-none" />
-          
-          {/* CTA Part */}
-          <div className="px-8 sm:px-12 lg:px-16 pt-16 pb-12 relative z-10 flex flex-col lg:flex-row items-start justify-between gap-12 border-b border-white/10">
-            {/* Left Column: Heading + Body + CTA Button */}
-            <div className="space-y-5 max-w-xl">
-              <p className="text-[#CC4024] text-[10px] font-bold tracking-[0.2em] uppercase">
-                THE OFFER IS OPEN NOW
-              </p>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white">
-                Be part of what's next.
-              </h2>
-              <p className="text-base text-gray-300 pb-2">
-                Open your account and subscribe before 13 October 2026.
-              </p>
+          <div className="absolute top-0 right-0 w-[80%] lg:w-1/2 h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#CC4024]/30 via-transparent to-transparent pointer-events-none" />
+
+          {/* Left Column: Heading + Body + CTA Button */}
+          <div className="space-y-4 max-w-xl relative z-10">
+            <p className="text-[#CC4024] text-[10px] font-bold tracking-[0.2em] uppercase">
+              THE OFFER IS OPEN NOW
+            </p>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
+              Be part of what's next.
+            </h2>
+            <p className="text-sm sm:text-base text-gray-300">
+              Open your account and subscribe before 13 October 2026.
+            </p>
+            <div className="pt-2">
               <a
                 href={LOTUS_BETA_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 py-4 px-8 rounded-xl font-bold text-sm text-white bg-[#CC4024] hover:bg-[#b0351d] transition-colors cursor-pointer shadow-lg hover:shadow-xl hover:-translate-y-0.5 group"
+                className="inline-flex items-center gap-2 py-3.5 px-7 rounded-xl font-bold text-sm text-white bg-[#C10202] hover:bg-[#a00202] transition-colors cursor-pointer shadow-lg hover:shadow-xl hover:-translate-y-0.5 group"
               >
                 <span>Subscribe to the Dangote IPO</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
-
-            {/* Right Column: Subtle Brand Pillar Text */}
-            <div className="flex flex-col text-left lg:text-right space-y-2 text-gray-400 text-sm mt-8 lg:mt-0">
-              <span className="hover:text-white transition-colors cursor-default">People</span>
-              <span className="hover:text-white transition-colors cursor-default">Industry</span>
-              <span className="hover:text-white transition-colors cursor-default">Opportunity</span>
-              <span className="text-white font-bold pt-1">A brighter tomorrow</span>
-            </div>
           </div>
 
-          {/* Footer Part */}
-          <div className="px-8 sm:px-12 lg:px-16 py-12 relative z-10">
-            <div className="flex flex-col lg:flex-row items-start justify-between gap-12 border-b border-white/10 pb-12 mb-8">
-              
-              {/* Left Column */}
-              <div className="space-y-6 max-w-md">
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#CC4024] flex items-center justify-center font-black text-white text-sm shadow-md">
-                    LW
-                  </div>
-                  <span className="text-xl font-bold text-white tracking-tight">LOTUS Wealth</span>
-                </div>
-                <div>
-                  <p className="text-sm font-bold text-white mb-2">
-                    Ethical. Transparent. Borderless.
-                  </p>
-                  <p className="text-sm text-gray-400 leading-relaxed">
-                    LOTUS Wealth is a mobile-first digital investment platform operated by LOTUS Financial Services Limited.
-                  </p>
-                </div>
-              </div>
-
-              {/* Right Column (Contact) */}
-              <div className="space-y-4 lg:text-left">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">CONTACT</p>
-                <div className="text-sm text-gray-300 space-y-2">
-                  <p className="font-bold text-white">LOTUS HOUSE</p>
-                  <p>182 Awolowo Road, Falomo, Ikoyi, Lagos, Nigeria</p>
-                  <p className="text-gray-400">0908 705 8405 • 0908 705 8406 • 0908 705 8409</p>
-                  <a href="mailto:info@lotuscapitallimited.com" className="text-[#CC4024] hover:text-white transition-colors inline-block mt-2">info@lotuscapitallimited.com</a>
-                </div>
-              </div>
-            </div>
-            
-            {/* Bottom Row */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-[11px] text-gray-500">
-              <p className="max-w-xl text-center sm:text-left">
-                LOTUS Wealth is registered and regulated by the Securities and Exchange Commission, Nigeria. Investing carries risk.
-              </p>
-              <p className="shrink-0 text-center sm:text-right">© 2026 LOTUS Group. All rights reserved.</p>
-            </div>
+          {/* Right Column: Subtle Brand Pillar Text */}
+          <div className="flex flex-col text-left lg:text-right space-y-2 text-gray-400 text-sm relative z-10">
+            <span className="hover:text-white transition-colors cursor-default">People</span>
+            <span className="hover:text-white transition-colors cursor-default">Industry</span>
+            <span className="hover:text-white transition-colors cursor-default">Opportunity</span>
+            <span className="text-white font-bold pt-1">A brighter tomorrow</span>
           </div>
         </div>
       </section>
+
+      {/* ------------------------------------------------------------- */}
+      {/* SIMPLE FOOTER                                                 */}
+      {/* ------------------------------------------------------------- */}
+      <footer className="bg-white border-t border-gray-200 py-12 px-4 sm:px-6 lg:px-8 text-gray-600">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row items-start justify-between gap-10 pb-10 border-b border-gray-100">
+            {/* Left Column: Lotus Wealth Logo + Summary */}
+            <div className="space-y-4 max-w-md">
+              <LotusLogo variant="wealth" theme="light" size="md" />
+              <p className="text-xs text-gray-500 leading-relaxed">
+                LOTUS Wealth is an ethical, digital investment platform operated by LOTUS Capital Limited / LOTUS Financial Services Limited.
+              </p>
+            </div>
+
+            {/* Right Column: Contact info */}
+            <div className="space-y-2 text-xs text-gray-600 md:text-right">
+              <p className="font-bold text-gray-900 text-sm">LOTUS HOUSE</p>
+              <p>182 Awolowo Road, Falomo, Ikoyi, Lagos, Nigeria</p>
+              <p className="text-gray-500">0908 705 8405 • 0908 705 8406 • 0908 705 8409</p>
+              <p>
+                <a href="mailto:info@lotuscapitallimited.com" className="text-[#C10202] font-semibold hover:underline">
+                  info@lotuscapitallimited.com
+                </a>
+              </p>
+            </div>
+          </div>
+
+          {/* Bottom disclaimer and copyright */}
+          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-gray-500">
+            <p className="text-center sm:text-left max-w-xl">
+              LOTUS Wealth is registered and regulated by the Securities and Exchange Commission (SEC), Nigeria. Investing carries risk of capital loss.
+            </p>
+            <p className="shrink-0 text-center sm:text-right">
+              © 2026 LOTUS Group. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
 
       {/* ------------------------------------------------------------- */}
       {/* Interactive Modals                                            */}
