@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { X, CheckCircle2, ShieldCheck, AlertCircle, ArrowRight, User, Building, CreditCard, Hash } from 'lucide-react';
 import { SubscriptionFormData } from '../types';
 
@@ -23,6 +23,24 @@ export const SubscribeModal: React.FC<SubscribeModalProps> = ({
   const [noCscs, setNoCscs] = useState(false);
   const [step, setStep] = useState<'form' | 'success'>('form');
 
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      // Optional: focus the close button for screen readers when modal opens
+      setTimeout(() => closeBtnRef.current?.focus(), 50);
+    }
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
   const sharePrice = 525;
   const minShares = 10;
   const totalAmount = Math.max(minShares, shares || 0) * sharePrice;
@@ -40,18 +58,25 @@ export const SubscribeModal: React.FC<SubscribeModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
-      <div className="relative w-full max-w-lg bg-[#0F1722] text-white rounded-3xl border border-gray-800 shadow-2xl overflow-hidden">
+      <div 
+        className="relative w-full max-w-lg bg-[#0F1722] text-white rounded-3xl border border-gray-800 shadow-2xl overflow-hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="subscribe-modal-title"
+      >
         {/* Modal Top Bar */}
         <div className="px-6 py-4 border-b border-gray-800 flex items-center justify-between bg-black/30">
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-[#C10202]" />
-            <h3 className="font-bold text-base text-white">
+            <h3 id="subscribe-modal-title" className="font-bold text-base text-white">
               {step === 'form' ? 'Subscribe to Dangote Refinery IPO' : 'Subscription Submitted'}
             </h3>
           </div>
           <button
+            ref={closeBtnRef}
             onClick={onClose}
-            className="p-1.5 rounded-full hover:bg-gray-800 text-gray-400 hover:text-white transition-colors"
+            aria-label="Close modal"
+            className="p-1.5 rounded-full hover:bg-gray-800 text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#C10202]"
           >
             <X className="w-5 h-5" />
           </button>
@@ -278,9 +303,19 @@ export const SubscribeModal: React.FC<SubscribeModalProps> = ({
               Payment instructions and settlement options have been sent to <span className="text-white font-medium">{email}</span>.
             </p>
 
+            <a
+              href="https://beta.lotuswealth.lotuscapitallimited.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full py-3 px-4 rounded-xl font-bold text-sm bg-[#C10202] hover:bg-[#a00202] text-white transition-colors flex items-center justify-center gap-2 shadow-lg shadow-red-900/40 cursor-pointer"
+            >
+              <span>Continue to LOTUS Wealth Portal</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+
             <button
               onClick={onClose}
-              className="w-full py-3 px-4 rounded-xl font-bold text-sm bg-gray-800 hover:bg-gray-700 text-white transition-colors"
+              className="w-full py-2.5 px-4 rounded-xl font-medium text-xs bg-gray-800/80 hover:bg-gray-700 text-gray-300 transition-colors"
             >
               Close Window
             </button>

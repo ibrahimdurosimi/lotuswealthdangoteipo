@@ -66,7 +66,22 @@ export function HowItWorksCarousel() {
   };
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto overflow-hidden rounded-3xl aspect-[4/3] sm:aspect-[21/9] bg-[#0B0F14] shadow-2xl">
+    <div 
+      className="relative w-full max-w-4xl mx-auto overflow-hidden rounded-3xl aspect-[4/3] sm:aspect-[21/9] bg-[#0B0F14] shadow-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C10202]"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="How it works steps"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          paginate(-1);
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          paginate(1);
+        }
+      }}
+    >
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={currentIndex}
@@ -91,6 +106,9 @@ export function HowItWorksCarousel() {
             }
           }}
           className="absolute inset-0 w-full h-full"
+          role="group"
+          aria-roledescription="slide"
+          aria-label={`${currentIndex + 1} of ${steps.length}`}
         >
           {/* Background Image with Overlay */}
           <div

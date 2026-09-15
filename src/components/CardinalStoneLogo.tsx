@@ -13,12 +13,10 @@ export const CardinalStoneLogo: React.FC<CardinalStoneLogoProps> = ({
   showText = true,
   textColor = '#000000',
 }) => {
-  // Try loading user uploaded file first, then fall back to SVG asset, then inline vector
-  const [useFallback, setUseFallback] = useState(false);
-
+  const [imgError, setImgError] = useState(false);
   const imgHeight = size === 'sm' ? '28px' : size === 'lg' ? '54px' : '40px';
 
-  if (!useFallback) {
+  if (!imgError) {
     return (
       <img
         src="/CardinalStone logo 2.png"
@@ -26,7 +24,7 @@ export const CardinalStoneLogo: React.FC<CardinalStoneLogoProps> = ({
         loading="lazy"
         className={`object-contain ${className}`}
         style={{ height: imgHeight, width: 'auto', display: 'inline-block' }}
-        onError={() => setUseFallback(true)}
+        onError={() => setImgError(true)}
       />
     );
   }

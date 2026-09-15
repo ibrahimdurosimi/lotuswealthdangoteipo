@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { X, FileText, CheckCircle2, TrendingUp, ShieldAlert, Download } from 'lucide-react';
 
 interface ResearchModalProps {
@@ -7,25 +7,49 @@ interface ResearchModalProps {
 }
 
 export const ResearchModal: React.FC<ResearchModalProps> = ({ isOpen, onClose }) => {
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      setTimeout(() => closeBtnRef.current?.focus(), 50);
+    }
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
-      <div className="relative w-full max-w-2xl bg-[#0F1722] text-white rounded-3xl border border-gray-800 shadow-2xl overflow-hidden flex flex-col max-h-[88vh]">
+      <div 
+        className="relative w-full max-w-2xl bg-[#0F1722] text-white rounded-3xl border border-gray-800 shadow-2xl overflow-hidden flex flex-col max-h-[88vh]"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="research-modal-title"
+      >
         {/* Header */}
         <div className="px-6 py-4 border-b border-gray-800 flex items-center justify-between bg-black/40 flex-shrink-0">
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-[#C10202]/20 text-[#C10202] flex items-center justify-center">
+            <div className="w-7 h-7 rounded-lg bg-[#C10202]/20 text-[#C10202] flex items-center justify-center" aria-hidden="true">
               <FileText className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="font-bold text-sm text-white">Investment Research Note</h3>
+              <h3 id="research-modal-title" className="font-bold text-sm text-white">Investment Research Note</h3>
               <p className="text-[11px] text-gray-400">Dangote Petroleum Refinery & Petrochemicals FZE</p>
             </div>
           </div>
           <button
+            ref={closeBtnRef}
             onClick={onClose}
-            className="p-1.5 rounded-full hover:bg-gray-800 text-gray-400 hover:text-white transition-colors"
+            aria-label="Close modal"
+            className="p-1.5 rounded-full hover:bg-gray-800 text-gray-400 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#C10202]"
           >
             <X className="w-5 h-5" />
           </button>

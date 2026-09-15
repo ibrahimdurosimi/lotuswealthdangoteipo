@@ -92,13 +92,15 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenSubscribe }) => {
               Frequently Asked Questions
             </h2>
           </div>
-          <button
-            onClick={onOpenSubscribe}
+          <a
+            href="https://beta.lotuswealth.lotuscapitallimited.com/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-800 text-xs font-semibold transition-colors cursor-pointer"
           >
             <span>Apply for the offer</span>
             <ArrowRight className="w-3.5 h-3.5 text-[#C10202]" />
-          </button>
+          </a>
         </div>
 
         {/* 2-Column Accordion */}

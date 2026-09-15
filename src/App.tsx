@@ -20,6 +20,8 @@ import SubscribeModal from './components/SubscribeModal';
 import ResearchModal from './components/ResearchModal';
 import FAQSection from './components/FAQSection';
 
+const LOTUS_BETA_URL = 'https://beta.lotuswealth.lotuscapitallimited.com/';
+
 export default function App() {
   // Hero segmented toggle: Individual vs Corporate
   const [accountType, setAccountType] = useState<'individual' | 'corporate'>('individual');
@@ -147,13 +149,15 @@ export default function App() {
 
           {/* Action CTA & Mobile Toggle */}
           <div className="flex items-center gap-3">
-            <button
-              onClick={() => setIsSubscribeModalOpen(true)}
+            <a
+              href={LOTUS_BETA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden sm:flex py-2 px-5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-[#C10202] hover:bg-[#a00202] transition-colors items-center gap-2 cursor-pointer shadow-sm"
             >
               <span>Subscribe now</span>
               <ArrowRight className="w-3.5 h-3.5" />
-            </button>
+            </a>
 
             {/* Mobile Menu Toggle */}
             <button
@@ -192,16 +196,16 @@ export default function App() {
                 FAQ
               </a>
               <div className="pt-2 border-t border-gray-100">
-                <button
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    setIsSubscribeModalOpen(true);
-                  }}
-                  className="w-full py-3 rounded-xl text-sm font-semibold text-white bg-[#C10202] hover:bg-[#a00202] transition-colors flex items-center justify-center gap-2 shadow-sm"
+                <a
+                  href={LOTUS_BETA_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-full py-3 rounded-xl text-sm font-semibold text-white bg-[#C10202] hover:bg-[#a00202] transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer"
                 >
                   <span>Subscribe now</span>
                   <ArrowRight className="w-4 h-4" />
-                </button>
+                </a>
               </div>
             </nav>
           </div>
@@ -342,20 +346,25 @@ export default function App() {
                   </div>
                 </div>
 
-                <button
-                  onClick={() => setIsSubscribeModalOpen(true)}
+                <a
+                  href={LOTUS_BETA_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full mt-4 py-3 px-5 rounded-xl font-semibold text-sm text-white bg-[#C10202] hover:bg-[#a00202] transition-colors flex items-center justify-center gap-2 group cursor-pointer shadow-sm"
                 >
                   <span>Apply Now</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                </button>
+                </a>
                 
-                <button
+                <a
+                  href={LOTUS_BETA_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full mt-3 py-3 px-5 rounded-xl font-semibold text-sm text-gray-700 bg-gray-50 hover:bg-gray-100 border border-gray-200 transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                 >
                   <FileText className="w-4 h-4" />
                   <span>Download Prospectus</span>
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -399,7 +408,12 @@ export default function App() {
             </h2>
           </div>
 
-          <div className="relative mb-6">
+          <div 
+            className="relative mb-6"
+            role="region"
+            aria-roledescription="carousel"
+            aria-label="Why It Matters Highlights"
+          >
             {/* Desktop Navigation Arrows */}
             <button 
               onClick={() => {
@@ -407,9 +421,10 @@ export default function App() {
                   whyItMattersRef.current.scrollBy({ left: -350, behavior: 'smooth' });
                 }
               }}
-              className="hidden md:flex absolute top-1/2 -left-4 -translate-y-1/2 w-10 h-10 bg-white shadow-lg rounded-full items-center justify-center text-gray-600 hover:text-[#C10202] hover:scale-110 transition-all z-10 border border-gray-100"
+              className="hidden md:flex absolute top-1/2 -left-4 -translate-y-1/2 w-10 h-10 bg-white shadow-lg rounded-full items-center justify-center text-gray-600 hover:text-[#C10202] hover:scale-110 transition-all z-10 border border-gray-100 focus:outline-none focus:ring-2 focus:ring-[#C10202]"
+              aria-label="Previous slide"
             >
-              <ChevronDown className="w-5 h-5 rotate-90" />
+              <ChevronDown className="w-5 h-5 rotate-90" aria-hidden="true" />
             </button>
             <button 
               onClick={() => {
@@ -417,25 +432,41 @@ export default function App() {
                   whyItMattersRef.current.scrollBy({ left: 350, behavior: 'smooth' });
                 }
               }}
-              className="hidden md:flex absolute top-1/2 -right-4 -translate-y-1/2 w-10 h-10 bg-white shadow-lg rounded-full items-center justify-center text-gray-600 hover:text-[#C10202] hover:scale-110 transition-all z-10 border border-gray-100"
+              className="hidden md:flex absolute top-1/2 -right-4 -translate-y-1/2 w-10 h-10 bg-white shadow-lg rounded-full items-center justify-center text-gray-600 hover:text-[#C10202] hover:scale-110 transition-all z-10 border border-gray-100 focus:outline-none focus:ring-2 focus:ring-[#C10202]"
+              aria-label="Next slide"
             >
-              <ChevronDown className="w-5 h-5 -rotate-90" />
+              <ChevronDown className="w-5 h-5 -rotate-90" aria-hidden="true" />
             </button>
 
             <div 
               ref={whyItMattersRef}
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'ArrowLeft') {
+                  e.preventDefault();
+                  whyItMattersRef.current?.scrollBy({ left: -350, behavior: 'smooth' });
+                } else if (e.key === 'ArrowRight') {
+                  e.preventDefault();
+                  whyItMattersRef.current?.scrollBy({ left: 350, behavior: 'smooth' });
+                }
+              }}
               onMouseDown={handleMouseDown}
               onMouseLeave={handleMouseLeave}
               onMouseUp={handleMouseUp}
               onMouseMove={handleMouseMove}
-              className={`flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 sm:gap-6 pb-6 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 ${
+              className={`flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 sm:gap-6 pb-6 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C10202] ${
                 isDragging ? 'cursor-grabbing snap-none' : 'cursor-grab'
               }`}
             >
               {/* Card 1 */}
-              <div className="w-[85vw] sm:w-[320px] shrink-0 snap-center bg-[#F9FAFB] rounded-2xl p-8 relative transition-all duration-300 hover:shadow-md border border-transparent hover:border-gray-100">
-                <div className="absolute top-8 right-8 text-[#D4B58C] font-bold text-xl">01</div>
-                <div className="w-10 h-10 rounded bg-white border border-red-100 flex items-center justify-center mb-6">
+              <div 
+                className="w-[85vw] sm:w-[320px] shrink-0 snap-center bg-[#F9FAFB] rounded-2xl p-8 relative transition-all duration-300 hover:shadow-md border border-transparent hover:border-gray-100"
+                role="group"
+                aria-roledescription="slide"
+                aria-label="1 of 4"
+              >
+                <div className="absolute top-8 right-8 text-[#D4B58C] font-bold text-xl" aria-hidden="true">01</div>
+                <div className="w-10 h-10 rounded bg-white border border-red-100 flex items-center justify-center mb-6" aria-hidden="true">
                   <Factory className="w-5 h-5 text-[#C10202]" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-3">Africa's largest industrial IPO</h3>
@@ -445,9 +476,14 @@ export default function App() {
               </div>
 
               {/* Card 2 */}
-              <div className="w-[85vw] sm:w-[320px] shrink-0 snap-center bg-[#F9FAFB] rounded-2xl p-8 relative transition-all duration-300 hover:shadow-md border border-transparent hover:border-gray-100">
-                <div className="absolute top-8 right-8 text-[#D4B58C] font-bold text-xl">02</div>
-                <div className="w-10 h-10 rounded bg-white border border-red-100 flex items-center justify-center mb-6">
+              <div 
+                className="w-[85vw] sm:w-[320px] shrink-0 snap-center bg-[#F9FAFB] rounded-2xl p-8 relative transition-all duration-300 hover:shadow-md border border-transparent hover:border-gray-100"
+                role="group"
+                aria-roledescription="slide"
+                aria-label="2 of 4"
+              >
+                <div className="absolute top-8 right-8 text-[#D4B58C] font-bold text-xl" aria-hidden="true">02</div>
+                <div className="w-10 h-10 rounded bg-white border border-red-100 flex items-center justify-center mb-6" aria-hidden="true">
                   <FileText className="w-5 h-5 text-[#C10202]" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-3">A real, tangible asset</h3>
@@ -457,9 +493,14 @@ export default function App() {
               </div>
 
               {/* Card 3 */}
-              <div className="w-[85vw] sm:w-[320px] shrink-0 snap-center bg-[#F9FAFB] rounded-2xl p-8 relative transition-all duration-300 hover:shadow-md border border-transparent hover:border-gray-100">
-                <div className="absolute top-8 right-8 text-[#D4B58C] font-bold text-xl">03</div>
-                <div className="w-10 h-10 rounded bg-white border border-red-100 flex items-center justify-center mb-6">
+              <div 
+                className="w-[85vw] sm:w-[320px] shrink-0 snap-center bg-[#F9FAFB] rounded-2xl p-8 relative transition-all duration-300 hover:shadow-md border border-transparent hover:border-gray-100"
+                role="group"
+                aria-roledescription="slide"
+                aria-label="3 of 4"
+              >
+                <div className="absolute top-8 right-8 text-[#D4B58C] font-bold text-xl" aria-hidden="true">03</div>
+                <div className="w-10 h-10 rounded bg-white border border-red-100 flex items-center justify-center mb-6" aria-hidden="true">
                   <Users className="w-5 h-5 text-[#C10202]" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-3">Open to every investor</h3>
@@ -469,9 +510,14 @@ export default function App() {
               </div>
 
               {/* Card 4 */}
-              <div className="w-[85vw] sm:w-[320px] shrink-0 snap-center bg-[#F9FAFB] rounded-2xl p-8 relative transition-all duration-300 hover:shadow-md border border-transparent hover:border-gray-100">
-                <div className="absolute top-8 right-8 text-[#D4B58C] font-bold text-xl">04</div>
-                <div className="w-10 h-10 rounded bg-white border border-red-100 flex items-center justify-center mb-6">
+              <div 
+                className="w-[85vw] sm:w-[320px] shrink-0 snap-center bg-[#F9FAFB] rounded-2xl p-8 relative transition-all duration-300 hover:shadow-md border border-transparent hover:border-gray-100"
+                role="group"
+                aria-roledescription="slide"
+                aria-label="4 of 4"
+              >
+                <div className="absolute top-8 right-8 text-[#D4B58C] font-bold text-xl" aria-hidden="true">04</div>
+                <div className="w-10 h-10 rounded bg-white border border-red-100 flex items-center justify-center mb-6" aria-hidden="true">
                   <ShieldCheck className="w-5 h-5 text-[#C10202]" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-3">The process you already trust</h3>
@@ -588,80 +634,98 @@ export default function App() {
       {/* ------------------------------------------------------------- */}
       {/* SECTION: HOW TO PARTICIPATE                                   */}
       {/* ------------------------------------------------------------- */}
-      <section id="how-it-works" className="py-20 lg:py-24 bg-[#F9FAFB] text-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-[#C10202] text-xs font-bold tracking-[0.2em] uppercase mb-4">
-            How to Participate
+      <section id="how-it-works" className="py-20 lg:py-24 bg-[#FAF7F2] text-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-[#CC4024] text-[10px] font-bold tracking-[0.2em] uppercase mb-4 text-center lg:text-left">
+            HOW TO PARTICIPATE
           </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight mb-5">
-            Four clear steps.
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight mb-5 text-center lg:text-left">
+            Four clear steps to take<br className="hidden lg:block"/> your position.
           </h2>
-          <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto mb-16">
+          <p className="text-sm sm:text-base text-gray-600 max-w-lg mb-16 text-center lg:text-left">
             Complete your application online and keep your details accurate and up to date.
           </p>
 
-          <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none hide-scrollbar gap-6 pb-6 md:pb-0 -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 text-left">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 text-left">
             {/* Step 1 */}
-            <div className="w-[85vw] md:w-auto shrink-0 snap-center md:snap-align-none bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-gray-100 border-t-[3px] border-t-[#C10202] p-6 lg:p-8 flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg">
-              <div className="w-12 h-12 rounded-full bg-[#FFF0F0] text-[#C10202] font-bold flex items-center justify-center mb-6 text-lg">
-                1
+            <div className="lg:col-span-3 bg-[#F6F0E6] rounded-[32px] p-8 lg:p-10 flex flex-col justify-between min-h-[320px]">
+              <div className="flex justify-between items-start">
+                <span className="text-6xl font-bold text-[#E2A696]">01</span>
+                <span className="px-3 py-1 bg-black/5 text-gray-600 text-[10px] font-bold rounded-full">Step 1 of 4</span>
               </div>
-              <h3 className="text-base font-bold text-gray-900 mb-3">
-                Sign Up
-              </h3>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Create your LOTUS Wealth account in minutes.
-              </p>
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  Sign Up
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed mb-8 max-w-sm">
+                  Create your LOTUS Wealth account in minutes and verify your details securely.
+                </p>
+                <div className="flex items-center gap-2 text-xs text-gray-500">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#CC4024]"></div>
+                  A quick, secure start
+                </div>
+              </div>
             </div>
 
             {/* Step 2 */}
-            <div className="w-[85vw] md:w-auto shrink-0 snap-center md:snap-align-none bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-gray-100 border-t-[3px] border-t-[#C10202] p-6 lg:p-8 flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg">
-              <div className="w-12 h-12 rounded-full bg-[#FFF0F0] text-[#C10202] font-bold flex items-center justify-center mb-6 text-lg">
-                2
+            <div className="lg:col-span-2 bg-[#363332] rounded-[32px] p-8 lg:p-10 flex flex-col justify-between min-h-[320px]">
+              <div className="flex justify-between items-start">
+                <span className="text-6xl font-bold text-[#4B4847]">02</span>
+                <span className="px-3 py-1 bg-white/10 text-white/80 text-[10px] font-bold rounded-full">Step 2 of 4</span>
               </div>
-              <h3 className="text-base font-bold text-gray-900 mb-3">
-                Open the offer page
-              </h3>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                On Lotus Wealth's dashboard, use the dedicated link to reach the Dangote-IPO offer page.
-              </p>
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  Open the offer page
+                </h3>
+                <p className="text-sm text-gray-300 leading-relaxed mb-8 max-w-sm">
+                  From your LOTUS Wealth dashboard, use the dedicated link to reach the Dangote IPO offer page.
+                </p>
+                <div className="flex items-center gap-2 text-xs text-gray-300">
+                  <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
+                  Everything in one place
+                </div>
+              </div>
             </div>
 
             {/* Step 3 */}
-            <div className="w-[85vw] md:w-auto shrink-0 snap-center md:snap-align-none bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-gray-100 border-t-[3px] border-t-[#C10202] p-6 lg:p-8 flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg">
-              <div className="w-12 h-12 rounded-full bg-[#FFF0F0] text-[#C10202] font-bold flex items-center justify-center mb-6 text-lg">
-                3
+            <div className="lg:col-span-2 bg-[#B73D22] rounded-[32px] p-8 lg:p-10 flex flex-col justify-between min-h-[320px]">
+              <div className="flex justify-between items-start">
+                <span className="text-6xl font-bold text-[#9C321B]">03</span>
+                <span className="px-3 py-1 bg-black/10 text-white/90 text-[10px] font-bold rounded-full">Step 3 of 4</span>
               </div>
-              <h3 className="text-base font-bold text-gray-900 mb-3">
-                Review the Offer Documents
-              </h3>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Read the prospectus and other offer materials to understand the investment opportunity and associated risks.
-              </p>
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  Review the Offer Documents
+                </h3>
+                <p className="text-sm text-white/80 leading-relaxed mb-8 max-w-sm">
+                  Read the prospectus and other offer materials to understand the investment opportunity and associated risks.
+                </p>
+                <div className="flex items-center gap-2 text-xs text-white/90">
+                  <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
+                  Review before you invest
+                </div>
+              </div>
             </div>
 
             {/* Step 4 */}
-            <div className="w-[85vw] md:w-auto shrink-0 snap-center md:snap-align-none bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-gray-100 border-t-[3px] border-t-[#C10202] p-6 lg:p-8 flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg">
-              <div className="w-12 h-12 rounded-full bg-[#FFF0F0] text-[#C10202] font-bold flex items-center justify-center mb-6 text-lg">
-                4
+            <div className="lg:col-span-3 bg-[#F6F0E6] rounded-[32px] p-8 lg:p-10 flex flex-col justify-between min-h-[320px]">
+              <div className="flex justify-between items-start">
+                <span className="text-6xl font-bold text-[#E2A696]">04</span>
+                <span className="px-3 py-1 bg-black/5 text-gray-600 text-[10px] font-bold rounded-full">Step 4 of 4</span>
               </div>
-              <h3 className="text-base font-bold text-gray-900 mb-3">
-                Choose Your Shares
-              </h3>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Select how many shares you'd like to purchase and Submit your application securely through LOTUS Wealth
-              </p>
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  Choose Your Shares
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed mb-8 max-w-sm">
+                  Select how many shares you'd like to purchase and submit your application securely through LOTUS Wealth.
+                </p>
+                <div className="flex items-center gap-2 text-xs text-gray-500">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#CC4024]"></div>
+                  You stay in control
+                </div>
+              </div>
             </div>
-          </div>
-
-          <div className="mt-14">
-            <button
-              onClick={() => setIsSubscribeModalOpen(true)}
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm text-white bg-[#C10202] hover:bg-[#a00202] transition-colors shadow-md cursor-pointer group"
-            >
-              <span>Subscribe to the Dangote IPO</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-            </button>
           </div>
         </div>
       </section>
@@ -685,12 +749,15 @@ export default function App() {
               </p>
               
               <div className="pt-4">
-                <button
+                <a
+                  href={LOTUS_BETA_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-sm text-[#C10202] bg-red-50 hover:bg-red-100 transition-colors shadow-sm cursor-pointer border border-red-100 group"
                 >
                   <FileText className="w-5 h-5 group-hover:-translate-y-0.5 transition-transform" />
                   <span>Download Prospectus</span>
-                </button>
+                </a>
               </div>
             </div>
 
@@ -762,8 +829,21 @@ export default function App() {
                   </div>
                 </div>
 
+                {/* Direct CTA */}
+                <div className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                  <a
+                    href={LOTUS_BETA_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="py-3 px-6 rounded-xl font-bold text-sm text-white bg-[#C10202] hover:bg-[#a00202] transition-colors flex items-center justify-center gap-2 shadow-lg shadow-red-900/40 cursor-pointer"
+                  >
+                    <span>Launch LOTUS Wealth</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                </div>
+
                 {/* Waitlist Subscription Component */}
-                <div className="pt-2">
+                <div className="pt-1">
                   <WaitlistForm />
                 </div>
               </div>
@@ -776,118 +856,95 @@ export default function App() {
       {/* SECTION: QUESTIONS? WE'VE GOT YOU. - FAQs                     */}
       {/* ------------------------------------------------------------- */}
       <div id="faq">
-        <FAQSection onOpenSubscribe={() => setIsSubscribeModalOpen(true)} />
+        <FAQSection onOpenSubscribe={() => window.open(LOTUS_BETA_URL, '_blank', 'noopener,noreferrer')} />
       </div>
 
       {/* ------------------------------------------------------------- */}
-      {/* SECTION: CTA BANNER                                           */}
+      {/* SECTION: CTA BANNER & FOOTER (COMBINED)                       */}
       {/* ------------------------------------------------------------- */}
-      <section
-        className="relative py-16 lg:py-20 overflow-hidden border-t border-white/10"
-        style={{
-          backgroundImage: `linear-gradient(90deg, rgba(140, 2, 2, 0.96) 0%, rgba(193, 2, 2, 0.90) 50%, rgba(100, 1, 1, 0.96) 100%), url(/refinery-hero.jpg)`,
-          backgroundPosition: 'center 60%',
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+      <section className="bg-[#FAF7F2] pb-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto rounded-[32px] overflow-hidden bg-[#242221] text-white relative shadow-2xl">
+          
+          {/* Subtle Red Gradient Background Mesh */}
+          <div className="absolute top-0 right-0 w-[80%] lg:w-1/2 h-[80%] lg:h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#CC4024]/30 via-transparent to-transparent pointer-events-none" />
+          
+          {/* CTA Part */}
+          <div className="px-8 sm:px-12 lg:px-16 pt-16 pb-12 relative z-10 flex flex-col lg:flex-row items-start justify-between gap-12 border-b border-white/10">
             {/* Left Column: Heading + Body + CTA Button */}
-            <div className="space-y-3.5 max-w-xl text-center lg:text-left">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+            <div className="space-y-5 max-w-xl">
+              <p className="text-[#CC4024] text-[10px] font-bold tracking-[0.2em] uppercase">
+                THE OFFER IS OPEN NOW
+              </p>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white">
                 Be part of what's next.
               </h2>
-              <p className="text-sm sm:text-base text-white/90 leading-relaxed font-normal">
-                The offer is open now. Open your account and subscribe before 13 October 2026.
+              <p className="text-base text-gray-300 pb-2">
+                Open your account and subscribe before 13 October 2026.
               </p>
-              <div className="pt-2">
-                <button
-                  onClick={() => setIsSubscribeModalOpen(true)}
-                  className="inline-flex items-center gap-2 py-3 px-6 rounded-xl font-semibold text-xs sm:text-sm text-[#C10202] bg-white hover:bg-gray-100 transition-colors shadow-lg cursor-pointer"
-                >
-                  <span>Get started</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
+              <a
+                href={LOTUS_BETA_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 py-4 px-8 rounded-xl font-bold text-sm text-white bg-[#CC4024] hover:bg-[#b0351d] transition-colors cursor-pointer shadow-lg hover:shadow-xl hover:-translate-y-0.5 group"
+              >
+                <span>Subscribe to the Dangote IPO</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </a>
             </div>
 
             {/* Right Column: Subtle Brand Pillar Text */}
-            <div className="flex flex-col items-center lg:items-end text-right select-none space-y-1 text-white/70 font-semibold tracking-wider text-xs sm:text-sm">
-              <span>People</span>
-              <span>Industry</span>
-              <span>Opportunity</span>
-              <span className="text-white font-bold">A brighter tomorrow</span>
+            <div className="flex flex-col text-left lg:text-right space-y-2 text-gray-400 text-sm mt-8 lg:mt-0">
+              <span className="hover:text-white transition-colors cursor-default">People</span>
+              <span className="hover:text-white transition-colors cursor-default">Industry</span>
+              <span className="hover:text-white transition-colors cursor-default">Opportunity</span>
+              <span className="text-white font-bold pt-1">A brighter tomorrow</span>
+            </div>
+          </div>
+
+          {/* Footer Part */}
+          <div className="px-8 sm:px-12 lg:px-16 py-12 relative z-10">
+            <div className="flex flex-col lg:flex-row items-start justify-between gap-12 border-b border-white/10 pb-12 mb-8">
+              
+              {/* Left Column */}
+              <div className="space-y-6 max-w-md">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-[#CC4024] flex items-center justify-center font-black text-white text-sm shadow-md">
+                    LW
+                  </div>
+                  <span className="text-xl font-bold text-white tracking-tight">LOTUS Wealth</span>
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-white mb-2">
+                    Ethical. Transparent. Borderless.
+                  </p>
+                  <p className="text-sm text-gray-400 leading-relaxed">
+                    LOTUS Wealth is a mobile-first digital investment platform operated by LOTUS Financial Services Limited.
+                  </p>
+                </div>
+              </div>
+
+              {/* Right Column (Contact) */}
+              <div className="space-y-4 lg:text-left">
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">CONTACT</p>
+                <div className="text-sm text-gray-300 space-y-2">
+                  <p className="font-bold text-white">LOTUS HOUSE</p>
+                  <p>182 Awolowo Road, Falomo, Ikoyi, Lagos, Nigeria</p>
+                  <p className="text-gray-400">0908 705 8405 • 0908 705 8406 • 0908 705 8409</p>
+                  <a href="mailto:info@lotuscapitallimited.com" className="text-[#CC4024] hover:text-white transition-colors inline-block mt-2">info@lotuscapitallimited.com</a>
+                </div>
+              </div>
+            </div>
+            
+            {/* Bottom Row */}
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-[11px] text-gray-500">
+              <p className="max-w-xl text-center sm:text-left">
+                LOTUS Wealth is registered and regulated by the Securities and Exchange Commission, Nigeria. Investing carries risk.
+              </p>
+              <p className="shrink-0 text-center sm:text-right">© 2026 LOTUS Group. All rights reserved.</p>
             </div>
           </div>
         </div>
       </section>
-
-      {/* ------------------------------------------------------------- */}
-      {/* FOOTER                                                        */}
-      {/* ------------------------------------------------------------- */}
-      <footer className="bg-[#05080D] border-t border-white/10 py-12 text-gray-400 text-xs">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-          <div className="flex flex-col lg:flex-row items-start lg:items-start justify-between gap-8 pb-8 border-b border-white/10">
-            {/* Brand Logo, Tagline & Description */}
-            <div className="space-y-3 max-w-md">
-              <div className="flex items-center gap-4">
-                <LotusLogo variant="wealth" theme="dark" size="md" />
-                <div className="h-5 w-px bg-white/20" />
-                <CardinalStoneLogo size="sm" showText={false} />
-              </div>
-              <div>
-                <p className="text-sm font-bold text-white tracking-wide">
-                  Ethical. Transparent. Borderless.
-                </p>
-                <p className="text-xs text-gray-400 mt-1.5 leading-relaxed">
-                  LOTUS Wealth is a mobile-first digital investment platform operated by LOTUS Financial Services Limited.
-                </p>
-              </div>
-            </div>
-
-            {/* Contact Details */}
-            <div className="space-y-2">
-              <p className="text-xs font-black uppercase tracking-wider text-white">Contact</p>
-              <div className="text-xs text-gray-300 space-y-1 leading-relaxed">
-                <p className="font-bold text-white">LOTUS HOUSE</p>
-                <p>182 Awolowo Road, Falomo, Ikoyi, Lagos, Nigeria</p>
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 pt-1 font-medium text-gray-300">
-                  <a href="tel:09087058405" className="hover:text-[#C10202] transition-colors">
-                    0908 705 8405
-                  </a>
-                  <span className="text-gray-600">•</span>
-                  <a href="tel:09087058406" className="hover:text-[#C10202] transition-colors">
-                    0908 705 8406
-                  </a>
-                  <span className="text-gray-600">•</span>
-                  <a href="tel:09087058409" className="hover:text-[#C10202] transition-colors">
-                    0908 705 8409
-                  </a>
-                </div>
-                <p className="pt-1">
-                  <a
-                    href="mailto:info@lotuscapitallimited.com"
-                    className="text-[#C10202] hover:underline font-semibold"
-                  >
-                    info@lotuscapitallimited.com
-                  </a>
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Regulatory Disclaimer & Copyright */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[11px] text-gray-500 leading-relaxed">
-            <p className="max-w-3xl">
-              LOTUS Wealth is registered and regulated by the Securities and Exchange Commission, Nigeria. Investing carries risk.
-            </p>
-            <p className="whitespace-nowrap sm:text-right">
-              © 2026 LOTUS Group. All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
 
       {/* ------------------------------------------------------------- */}
       {/* Interactive Modals                                            */}

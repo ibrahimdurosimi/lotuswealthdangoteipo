@@ -86,14 +86,24 @@ export const LotusWealthMockup: React.FC<{ className?: string }> = ({ className 
 
             {/* Quick Action Buttons */}
             <div className="grid grid-cols-2 gap-2.5 mt-3">
-              <button className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-full bg-gray-900 text-white text-[11px] font-semibold hover:bg-black transition-colors">
+              <a
+                href="https://beta.lotuswealth.lotuscapitallimited.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-full bg-gray-900 text-white text-[11px] font-semibold hover:bg-black transition-colors cursor-pointer"
+              >
                 <ArrowDownLeft className="w-3.5 h-3.5" />
                 <span>Fund Wallet</span>
-              </button>
-              <button className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-full bg-[#C10202] text-white text-[11px] font-semibold hover:bg-[#a00202] transition-colors shadow-sm shadow-red-500/30">
+              </a>
+              <a
+                href="https://beta.lotuswealth.lotuscapitallimited.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-full bg-[#C10202] text-white text-[11px] font-semibold hover:bg-[#a00202] transition-colors shadow-sm shadow-red-500/30 cursor-pointer"
+              >
                 <ArrowUpRight className="w-3.5 h-3.5" />
                 <span>Invest</span>
-              </button>
+              </a>
             </div>
           </div>
 
