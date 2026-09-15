@@ -209,7 +209,14 @@ export default function App() {
               {/* Main Headline with exact styling from CSS 1 */}
               <h1
                 className="font-bold tracking-tight text-white"
-                style={{ fontSize: '75px', lineHeight: '76px' }}
+                style={{
+                  fontSize: '90px',
+                  lineHeight: '84px',
+                  textAlign: 'left',
+                  fontStyle: 'normal',
+                  fontFamily: 'Arial',
+                  textDecorationLine: 'none',
+                }}
               >
                 Don't just buy fuel. <br />
                 <span className="text-white">Own a piece of a Refinery</span>
@@ -218,7 +225,7 @@ export default function App() {
               {/* Subtitle with exact styling from CSS 2 */}
               <p
                 className="text-gray-200 max-w-xl leading-relaxed"
-                style={{ fontSize: '22px', fontWeight: 'normal', lineHeight: '30px' }}
+                style={{ fontSize: '19px', fontWeight: 'normal', lineHeight: '30px' }}
               >
                 Participate in the Dangote Petroleum Refinery Initial Public Offer through LOTUS Wealth in partnership with CardinalStone Securities.
               </p>
@@ -227,7 +234,7 @@ export default function App() {
               <div className="pt-2">
                 <p
                   className="font-semibold mb-3"
-                  style={{ fontSize: '18px', color: '#ffffff' }}
+                  style={{ fontSize: '18px', color: '#ffffff', fontFamily: 'Arial', fontWeight: 'normal' }}
                 >
                   Offer closes in
                 </p>
@@ -549,12 +556,9 @@ export default function App() {
           <p className="text-[#C10202] text-[10px] font-bold tracking-[0.2em] uppercase mb-4 text-center lg:text-left">
             HOW TO PARTICIPATE
           </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight mb-5 text-center lg:text-left">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight mb-12 text-center lg:text-left">
             Four clear steps to take<br className="hidden lg:block"/> your position.
           </h2>
-          <p className="text-sm sm:text-base text-gray-600 max-w-lg mb-16 text-center lg:text-left">
-            Complete your application online and keep your details accurate and up to date.
-          </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 text-left">
             {/* Step 1 */}

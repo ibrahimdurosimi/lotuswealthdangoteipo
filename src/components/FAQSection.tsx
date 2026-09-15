@@ -9,7 +9,7 @@ interface FAQSectionProps {
 const FAQS_COL_1: FAQItem[] = [
   {
     id: 'faq-1',
-    question: 'Who is Dangote Petroleum Refinery & Petrochemicals FZE?',
+    question: 'What is Dangote Petroleum Refinery & Petrochemicals FZE?',
     answer:
       'Dangote Petroleum Refinery & Petrochemicals FZE is the company offering ordinary shares through this public offer. The refinery is located in the Lekki Free Zone, Lagos. Full details are contained in the official prospectus.',
   },
