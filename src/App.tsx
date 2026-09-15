@@ -7,7 +7,6 @@ import {
   Info,
   Factory,
   FileText,
-  ShieldCheck,
   Users,
   Menu,
   X,
@@ -40,14 +39,6 @@ export default function App() {
   // Accordion state for new sections
   const [isAssessmentOpen, setIsAssessmentOpen] = useState(false);
 
-  // Carousel refs
-  const whyItMattersRef = useRef<HTMLDivElement>(null);
-
-  // Drag to scroll logic for desktop carousel
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-
   // Live countdown timer state (Offer closes in 29 days, 10 hrs, 19 min, 19 sec)
   const [timeLeft, setTimeLeft] = useState({
     days: 29,
@@ -65,29 +56,6 @@ export default function App() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (!whyItMattersRef.current) return;
-    setIsDragging(true);
-    setStartX(e.pageX - whyItMattersRef.current.offsetLeft);
-    setScrollLeft(whyItMattersRef.current.scrollLeft);
-  };
-
-  const handleMouseLeave = () => {
-    setIsDragging(false);
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || !whyItMattersRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - whyItMattersRef.current.offsetLeft;
-    const walk = (x - startX) * 2; // scroll-fast
-    whyItMattersRef.current.scrollLeft = scrollLeft - walk;
-  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -407,123 +375,48 @@ export default function App() {
             </h2>
           </div>
 
-          <div 
-            className="relative mb-6"
-            role="region"
-            aria-roledescription="carousel"
-            aria-label="Why It Matters Highlights"
-          >
-            {/* Desktop Navigation Arrows */}
-            <button 
-              onClick={() => {
-                if (whyItMattersRef.current) {
-                  whyItMattersRef.current.scrollBy({ left: -350, behavior: 'smooth' });
-                }
-              }}
-              className="hidden md:flex absolute top-1/2 -left-4 -translate-y-1/2 w-10 h-10 bg-white shadow-lg rounded-full items-center justify-center text-gray-600 hover:text-[#C10202] hover:scale-110 transition-all z-10 border border-gray-100 focus:outline-none focus:ring-2 focus:ring-[#C10202]"
-              aria-label="Previous slide"
-            >
-              <ChevronDown className="w-5 h-5 rotate-90" aria-hidden="true" />
-            </button>
-            <button 
-              onClick={() => {
-                if (whyItMattersRef.current) {
-                  whyItMattersRef.current.scrollBy({ left: 350, behavior: 'smooth' });
-                }
-              }}
-              className="hidden md:flex absolute top-1/2 -right-4 -translate-y-1/2 w-10 h-10 bg-white shadow-lg rounded-full items-center justify-center text-gray-600 hover:text-[#C10202] hover:scale-110 transition-all z-10 border border-gray-100 focus:outline-none focus:ring-2 focus:ring-[#C10202]"
-              aria-label="Next slide"
-            >
-              <ChevronDown className="w-5 h-5 -rotate-90" aria-hidden="true" />
-            </button>
-
-            <div 
-              ref={whyItMattersRef}
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'ArrowLeft') {
-                  e.preventDefault();
-                  whyItMattersRef.current?.scrollBy({ left: -350, behavior: 'smooth' });
-                } else if (e.key === 'ArrowRight') {
-                  e.preventDefault();
-                  whyItMattersRef.current?.scrollBy({ left: 350, behavior: 'smooth' });
-                }
-              }}
-              onMouseDown={handleMouseDown}
-              onMouseLeave={handleMouseLeave}
-              onMouseUp={handleMouseUp}
-              onMouseMove={handleMouseMove}
-              className={`flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 sm:gap-6 pb-6 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C10202] ${
-                isDragging ? 'cursor-grabbing snap-none' : 'cursor-grab'
-              }`}
-            >
-              {/* Card 1 */}
-              <div 
-                className="w-[85vw] sm:w-[320px] shrink-0 snap-center bg-[#F9FAFB] rounded-2xl p-8 relative transition-all duration-300 hover:shadow-md border border-transparent hover:border-gray-100"
-                role="group"
-                aria-roledescription="slide"
-                aria-label="1 of 4"
-              >
-                <div className="absolute top-8 right-8 text-[#D4B58C] font-bold text-xl" aria-hidden="true">01</div>
-                <div className="w-10 h-10 rounded bg-white border border-red-100 flex items-center justify-center mb-6" aria-hidden="true">
+          {/* 3-Column Balanced Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            {/* Card 1 */}
+            <div className="bg-[#F9FAFB] rounded-2xl p-8 relative transition-all duration-300 hover:shadow-md border border-transparent hover:border-gray-100 flex flex-col">
+              <div className="flex items-center justify-between mb-6">
+                <div className="w-10 h-10 rounded bg-white border border-red-100 flex items-center justify-center" aria-hidden="true">
                   <Factory className="w-5 h-5 text-[#C10202]" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-3">Africa's largest industrial IPO</h3>
-                <p className="text-sm text-gray-600 leading-relaxed pr-8">
-                  This offer is set to become the biggest public share sale in the continent's history, opening access to one of the largest single-train refineries in the world.
-                </p>
+                <span className="text-[#D4B58C] font-bold text-xl" aria-hidden="true">01</span>
               </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-3">A Historic Capital Markets Milestone</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Set to be the largest industrial IPO on the continent, this offering opens the door to ownership in one of the world’s largest single-train refineries.
+              </p>
+            </div>
 
-              {/* Card 2 */}
-              <div 
-                className="w-[85vw] sm:w-[320px] shrink-0 snap-center bg-[#F9FAFB] rounded-2xl p-8 relative transition-all duration-300 hover:shadow-md border border-transparent hover:border-gray-100"
-                role="group"
-                aria-roledescription="slide"
-                aria-label="2 of 4"
-              >
-                <div className="absolute top-8 right-8 text-[#D4B58C] font-bold text-xl" aria-hidden="true">02</div>
-                <div className="w-10 h-10 rounded bg-white border border-red-100 flex items-center justify-center mb-6" aria-hidden="true">
+            {/* Card 2 */}
+            <div className="bg-[#F9FAFB] rounded-2xl p-8 relative transition-all duration-300 hover:shadow-md border border-transparent hover:border-gray-100 flex flex-col">
+              <div className="flex items-center justify-between mb-6">
+                <div className="w-10 h-10 rounded bg-white border border-red-100 flex items-center justify-center" aria-hidden="true">
                   <FileText className="w-5 h-5 text-[#C10202]" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-3">A real, tangible asset</h3>
-                <p className="text-sm text-gray-600 leading-relaxed pr-8">
-                  Your investment sits behind physical refining infrastructure and real economic activity — not a promise on paper.
-                </p>
+                <span className="text-[#D4B58C] font-bold text-xl" aria-hidden="true">02</span>
               </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-3">Invest in Real Infrastructure</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Gain exposure to a strategic industrial asset underpinned by physical infrastructure, operational capacity, and long-term economic value creation.
+              </p>
+            </div>
 
-              {/* Card 3 */}
-              <div 
-                className="w-[85vw] sm:w-[320px] shrink-0 snap-center bg-[#F9FAFB] rounded-2xl p-8 relative transition-all duration-300 hover:shadow-md border border-transparent hover:border-gray-100"
-                role="group"
-                aria-roledescription="slide"
-                aria-label="3 of 4"
-              >
-                <div className="absolute top-8 right-8 text-[#D4B58C] font-bold text-xl" aria-hidden="true">03</div>
-                <div className="w-10 h-10 rounded bg-white border border-red-100 flex items-center justify-center mb-6" aria-hidden="true">
+            {/* Card 3 */}
+            <div className="bg-[#F9FAFB] rounded-2xl p-8 relative transition-all duration-300 hover:shadow-md border border-transparent hover:border-gray-100 flex flex-col">
+              <div className="flex items-center justify-between mb-6">
+                <div className="w-10 h-10 rounded bg-white border border-red-100 flex items-center justify-center" aria-hidden="true">
                   <Users className="w-5 h-5 text-[#C10202]" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-3">Open to every investor</h3>
-                <p className="text-sm text-gray-600 leading-relaxed pr-8">
-                  A minimum application of ₦5,250 brings a deal of this scale within reach, not just institutions.
-                </p>
+                <span className="text-[#D4B58C] font-bold text-xl" aria-hidden="true">03</span>
               </div>
-
-              {/* Card 4 */}
-              <div 
-                className="w-[85vw] sm:w-[320px] shrink-0 snap-center bg-[#F9FAFB] rounded-2xl p-8 relative transition-all duration-300 hover:shadow-md border border-transparent hover:border-gray-100"
-                role="group"
-                aria-roledescription="slide"
-                aria-label="4 of 4"
-              >
-                <div className="absolute top-8 right-8 text-[#D4B58C] font-bold text-xl" aria-hidden="true">04</div>
-                <div className="w-10 h-10 rounded bg-white border border-red-100 flex items-center justify-center mb-6" aria-hidden="true">
-                  <ShieldCheck className="w-5 h-5 text-[#C10202]" />
-                </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-3">The process you already trust</h3>
-                <p className="text-sm text-gray-600 leading-relaxed pr-8">
-                  Log in, fund your wallet, and apply using the same account and KYC you already have on Lotus Wealth.
-                </p>
-              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-3">Designed for Broad Participation</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Starting from just ₦5,250, investors of all sizes can take part in an opportunity that was once accessible only to institutional capital.
+              </p>
             </div>
           </div>
         </div>
@@ -594,9 +487,9 @@ export default function App() {
       {/* ------------------------------------------------------------- */}
       {/* SECTION: HOW TO PARTICIPATE                                   */}
       {/* ------------------------------------------------------------- */}
-      <section id="how-it-works" className="py-20 lg:py-24 bg-[#FAF7F2] text-gray-900">
+      <section id="how-it-works" className="py-20 lg:py-24 bg-white text-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-[#CC4024] text-[10px] font-bold tracking-[0.2em] uppercase mb-4 text-center lg:text-left">
+          <p className="text-[#C10202] text-[10px] font-bold tracking-[0.2em] uppercase mb-4 text-center lg:text-left">
             HOW TO PARTICIPATE
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight mb-5 text-center lg:text-left">
@@ -608,10 +501,10 @@ export default function App() {
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 text-left">
             {/* Step 1 */}
-            <div className="lg:col-span-3 bg-[#F6F0E6] rounded-[32px] p-8 lg:p-10 flex flex-col justify-between min-h-[320px]">
+            <div className="lg:col-span-3 bg-[#EAEAEA] rounded-[32px] p-8 lg:p-10 flex flex-col justify-between min-h-[320px]">
               <div className="flex justify-between items-start">
-                <span className="text-6xl font-bold text-[#E2A696]">01</span>
-                <span className="px-3 py-1 bg-black/5 text-gray-600 text-[10px] font-bold rounded-full">Step 1 of 4</span>
+                <span className="text-6xl font-bold text-[#C10202]/30">01</span>
+                <span className="px-3 py-1 bg-white/80 text-gray-700 text-[10px] font-bold rounded-full">Step 1 of 4</span>
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">
@@ -620,18 +513,18 @@ export default function App() {
                 <p className="text-sm text-gray-600 leading-relaxed mb-8 max-w-sm">
                   Create your LOTUS Wealth account in minutes and verify your details securely.
                 </p>
-                <div className="flex items-center gap-2 text-xs text-gray-500">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#CC4024]"></div>
+                <div className="flex items-center gap-2 text-xs text-gray-600 font-medium">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#C10202]"></div>
                   A quick, secure start
                 </div>
               </div>
             </div>
 
             {/* Step 2 */}
-            <div className="lg:col-span-2 bg-[#363332] rounded-[32px] p-8 lg:p-10 flex flex-col justify-between min-h-[320px]">
+            <div className="lg:col-span-2 bg-[#1C0303] rounded-[32px] p-8 lg:p-10 flex flex-col justify-between min-h-[320px]">
               <div className="flex justify-between items-start">
-                <span className="text-6xl font-bold text-[#4B4847]">02</span>
-                <span className="px-3 py-1 bg-white/10 text-white/80 text-[10px] font-bold rounded-full">Step 2 of 4</span>
+                <span className="text-6xl font-bold text-[#C10202]/40">02</span>
+                <span className="px-3 py-1 bg-white/10 text-white/90 text-[10px] font-bold rounded-full">Step 2 of 4</span>
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-white mb-4">
@@ -640,27 +533,27 @@ export default function App() {
                 <p className="text-sm text-gray-300 leading-relaxed mb-8 max-w-sm">
                   From your LOTUS Wealth dashboard, use the dedicated link to reach the Dangote IPO offer page.
                 </p>
-                <div className="flex items-center gap-2 text-xs text-gray-300">
-                  <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
+                <div className="flex items-center gap-2 text-xs text-gray-300 font-medium">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#C10202]"></div>
                   Everything in one place
                 </div>
               </div>
             </div>
 
             {/* Step 3 */}
-            <div className="lg:col-span-2 bg-[#B73D22] rounded-[32px] p-8 lg:p-10 flex flex-col justify-between min-h-[320px]">
+            <div className="lg:col-span-2 bg-[#C10202] rounded-[32px] p-8 lg:p-10 flex flex-col justify-between min-h-[320px] shadow-sm">
               <div className="flex justify-between items-start">
-                <span className="text-6xl font-bold text-[#9C321B]">03</span>
-                <span className="px-3 py-1 bg-black/10 text-white/90 text-[10px] font-bold rounded-full">Step 3 of 4</span>
+                <span className="text-6xl font-bold text-black/20">03</span>
+                <span className="px-3 py-1 bg-black/15 text-white text-[10px] font-bold rounded-full">Step 3 of 4</span>
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-white mb-4">
                   Review the Offer Documents
                 </h3>
-                <p className="text-sm text-white/80 leading-relaxed mb-8 max-w-sm">
+                <p className="text-sm text-white/90 leading-relaxed mb-8 max-w-sm">
                   Read the prospectus and other offer materials to understand the investment opportunity and associated risks.
                 </p>
-                <div className="flex items-center gap-2 text-xs text-white/90">
+                <div className="flex items-center gap-2 text-xs text-white/90 font-medium">
                   <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
                   Review before you invest
                 </div>
@@ -668,10 +561,10 @@ export default function App() {
             </div>
 
             {/* Step 4 */}
-            <div className="lg:col-span-3 bg-[#F6F0E6] rounded-[32px] p-8 lg:p-10 flex flex-col justify-between min-h-[320px]">
+            <div className="lg:col-span-3 bg-[#EAEAEA] rounded-[32px] p-8 lg:p-10 flex flex-col justify-between min-h-[320px]">
               <div className="flex justify-between items-start">
-                <span className="text-6xl font-bold text-[#E2A696]">04</span>
-                <span className="px-3 py-1 bg-black/5 text-gray-600 text-[10px] font-bold rounded-full">Step 4 of 4</span>
+                <span className="text-6xl font-bold text-[#C10202]/30">04</span>
+                <span className="px-3 py-1 bg-white/80 text-gray-700 text-[10px] font-bold rounded-full">Step 4 of 4</span>
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">
@@ -680,8 +573,8 @@ export default function App() {
                 <p className="text-sm text-gray-600 leading-relaxed mb-8 max-w-sm">
                   Select how many shares you'd like to purchase and submit your application securely through LOTUS Wealth.
                 </p>
-                <div className="flex items-center gap-2 text-xs text-gray-500">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#CC4024]"></div>
+                <div className="flex items-center gap-2 text-xs text-gray-600 font-medium">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#C10202]"></div>
                   You stay in control
                 </div>
               </div>
@@ -766,10 +659,10 @@ export default function App() {
                     Your Investment Journey
                   </p>
                   <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-tight">
-                    Download LOTUS Wealth
+                    LOTUS Wealth (coming soon)
                   </h2>
                   <p className="text-xs sm:text-sm text-gray-300 mt-2 max-w-lg leading-relaxed">
-                    Your gateway to public offers and ethical investments. Open your account, stay informed, and subscribe directly from your mobile device.
+                    Your gateway to ethical investment opportunities.
                   </p>
                 </div>
 
@@ -777,7 +670,7 @@ export default function App() {
                 <div className="flex flex-wrap items-center gap-x-6 gap-y-2.5 text-xs sm:text-sm text-gray-300 py-1">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                    <span>Access public offers</span>
+                    <span>Digital First</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
@@ -795,10 +688,10 @@ export default function App() {
                     href={LOTUS_BETA_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="py-3 px-6 rounded-xl font-bold text-sm text-white bg-[#C10202] hover:bg-[#a00202] transition-colors flex items-center justify-center gap-2 shadow-lg shadow-red-900/40 cursor-pointer"
+                    className="py-2 px-4 rounded-lg font-medium text-xs text-white bg-[#C10202] hover:bg-[#a00202] transition-colors inline-flex items-center justify-center gap-1.5 shadow-md cursor-pointer w-fit"
                   >
-                    <span>Launch LOTUS Wealth</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <span>Learn more</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </a>
                 </div>
 
