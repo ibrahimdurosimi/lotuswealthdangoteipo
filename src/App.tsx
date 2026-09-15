@@ -17,6 +17,7 @@ import LotusWealthMockup from './components/LotusWealthMockup';
 import WaitlistForm from './components/WaitlistForm';
 import SubscribeModal from './components/SubscribeModal';
 import ResearchModal from './components/ResearchModal';
+import { AboutLotusModal } from './components/AboutLotusModal';
 import FAQSection from './components/FAQSection';
 
 const LOTUS_REGISTER_URL = 'https://beta.lotuswealth.lotuscapitallimited.com/register';
@@ -29,6 +30,7 @@ export default function App() {
   // Modals state
   const [isSubscribeModalOpen, setIsSubscribeModalOpen] = useState(false);
   const [isResearchModalOpen, setIsResearchModalOpen] = useState(false);
+  const [isAboutLotusModalOpen, setIsAboutLotusModalOpen] = useState(false);
 
   // Back to top button state
   const [showTopButton, setShowTopButton] = useState(false);
@@ -110,6 +112,7 @@ export default function App() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
             <a href="#how-it-works" className="text-gray-600 hover:text-[#C10202] transition-colors">How to Participate</a>
+            <a href="#about-lotus" className="text-gray-600 hover:text-[#C10202] transition-colors">About Lotus Wealth</a>
             <a href="#faq" className="text-gray-600 hover:text-[#C10202] transition-colors">FAQ</a>
             {/* Active Link Highlight Example */}
             <a href="#top" className="text-[#C10202] font-bold border-b-2 border-[#C10202] pb-1">Offer Info</a>
@@ -155,6 +158,13 @@ export default function App() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 How to Participate
+              </a>
+              <a 
+                href="#about-lotus" 
+                className="text-gray-600 hover:text-[#C10202] text-base font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                About Lotus Wealth
               </a>
               <a 
                 href="#faq" 
@@ -702,7 +712,7 @@ export default function App() {
       {/* SECTION: YOUR INVESTMENT JOURNEY - Download App & Waitlist    */}
       {/* ------------------------------------------------------------- */}
       <section
-        id="app"
+        id="about-lotus"
         className="py-16 lg:py-20 text-gray-900 border-t border-gray-200"
         style={{ backgroundColor: '#ffffff' }}
       >
@@ -744,17 +754,16 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Direct CTA */}
+                {/* Learn More CTA */}
                 <div className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-                  <a
-                    href={LOTUS_REGISTER_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    type="button"
+                    onClick={() => setIsAboutLotusModalOpen(true)}
                     className="py-2 px-4 rounded-lg font-medium text-xs text-white bg-[#C10202] hover:bg-[#a00202] transition-colors inline-flex items-center justify-center gap-1.5 shadow-md cursor-pointer w-fit"
                   >
-                    <span>Sign Up</span>
+                    <span>Learn more</span>
                     <ArrowRight className="w-3.5 h-3.5" />
-                  </a>
+                  </button>
                 </div>
 
                 {/* Waitlist Subscription Component */}
@@ -825,6 +834,11 @@ export default function App() {
       <ResearchModal
         isOpen={isResearchModalOpen}
         onClose={() => setIsResearchModalOpen(false)}
+      />
+
+      <AboutLotusModal
+        isOpen={isAboutLotusModalOpen}
+        onClose={() => setIsAboutLotusModalOpen(false)}
       />
 
       {/* Floating Contact Support Bubble */}
