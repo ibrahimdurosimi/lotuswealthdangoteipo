@@ -39,7 +39,7 @@ export const WaitlistForm: React.FC<{ className?: string }> = ({ className = '' 
             </div>
           </div>
           <a
-            href="https://beta.lotuswealth.lotuscapitallimited.com/"
+            href="https://beta.lotuswealth.lotuscapitallimited.com/register"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold text-white bg-[#C10202] hover:bg-[#a00202] transition-colors shadow-sm cursor-pointer whitespace-nowrap"

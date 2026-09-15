@@ -19,7 +19,8 @@ import SubscribeModal from './components/SubscribeModal';
 import ResearchModal from './components/ResearchModal';
 import FAQSection from './components/FAQSection';
 
-const LOTUS_BETA_URL = 'https://beta.lotuswealth.lotuscapitallimited.com/';
+const LOTUS_REGISTER_URL = 'https://beta.lotuswealth.lotuscapitallimited.com/register';
+const DANGOTE_PROSPECTUS_URL = 'https://ipo.dangote.com/prospectus.pdf';
 
 export default function App() {
   // Hero segmented toggle: Individual vs Corporate
@@ -117,12 +118,12 @@ export default function App() {
           {/* Action CTA & Mobile Toggle */}
           <div className="flex items-center gap-3">
             <a
-              href={LOTUS_BETA_URL}
+              href={LOTUS_REGISTER_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:flex py-2 px-5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-[#C10202] hover:bg-[#a00202] transition-colors items-center gap-2 cursor-pointer shadow-sm"
             >
-              <span>Subscribe now</span>
+              <span>Sign Up</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </a>
 
@@ -164,13 +165,13 @@ export default function App() {
               </a>
               <div className="pt-2 border-t border-gray-100">
                 <a
-                  href={LOTUS_BETA_URL}
+                  href={LOTUS_REGISTER_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="w-full py-3 rounded-xl text-sm font-semibold text-white bg-[#C10202] hover:bg-[#a00202] transition-colors flex items-center justify-center gap-2 shadow-sm cursor-pointer"
                 >
-                  <span>Subscribe now</span>
+                  <span>Sign Up</span>
                   <ArrowRight className="w-4 h-4" />
                 </a>
               </div>
@@ -211,7 +212,7 @@ export default function App() {
                 style={{ fontSize: '75px', lineHeight: '76px' }}
               >
                 Don't just buy fuel. <br />
-                <span className="text-white">Own a piece of it.</span>
+                <span className="text-white">Own a piece of a Refinery</span>
               </h1>
 
               {/* Subtitle with exact styling from CSS 2 */}
@@ -219,7 +220,7 @@ export default function App() {
                 className="text-gray-200 max-w-xl leading-relaxed"
                 style={{ fontSize: '22px', fontWeight: 'normal', lineHeight: '30px' }}
               >
-                Participate in the Dangote Petroleum Refinery Initial Public Offer through LOTUS Wealth in partnership with Cardinal Stone.
+                Participate in the Dangote Petroleum Refinery Initial Public Offer through LOTUS Wealth in partnership with CardinalStone Securities.
               </p>
 
               {/* Countdown Timer Block with exact styling from CSS 3 */}
@@ -314,17 +315,17 @@ export default function App() {
                 </div>
 
                 <a
-                  href={LOTUS_BETA_URL}
+                  href={LOTUS_REGISTER_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full mt-4 py-3 px-5 rounded-xl font-semibold text-sm text-white bg-[#C10202] hover:bg-[#a00202] transition-colors flex items-center justify-center gap-2 group cursor-pointer shadow-sm"
                 >
-                  <span>Apply Now</span>
+                  <span>Sign Up to Apply</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </a>
                 
                 <a
-                  href={LOTUS_BETA_URL}
+                  href={DANGOTE_PROSPECTUS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full mt-3 py-3 px-5 rounded-xl font-semibold text-sm text-gray-700 bg-gray-50 hover:bg-gray-100 border border-gray-200 transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
@@ -385,7 +386,7 @@ export default function App() {
                 </div>
                 <span className="text-[#D4B58C] font-bold text-xl" aria-hidden="true">01</span>
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-3">A Historic Capital Markets Milestone</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-3">A Historic Capital Market Milestone</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
                 Set to be the largest industrial IPO on the continent, this offering opens the door to ownership in one of the world’s largest single-train refineries.
               </p>
@@ -399,7 +400,7 @@ export default function App() {
                 </div>
                 <span className="text-[#D4B58C] font-bold text-xl" aria-hidden="true">02</span>
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-3">Invest in Real Infrastructure</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-3">Invest in Strategic Economic Sector</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
                 Gain exposure to a strategic industrial asset underpinned by physical infrastructure, operational capacity, and long-term economic value creation.
               </p>
@@ -459,7 +460,12 @@ export default function App() {
                     onClick={() => setIsAssessmentOpen(!isAssessmentOpen)}
                     className="flex items-center justify-between w-full py-5 font-bold text-gray-900 hover:text-[#C10202] transition-colors text-sm group"
                   >
-                    <span>How is this assessed?</span>
+                    <span className="flex items-center gap-2">
+                      <span>View FRACE Shari'ah Certification</span>
+                      <span className="text-[11px] font-semibold text-[#1B8A46] bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-100">
+                        Official Statement
+                      </span>
+                    </span>
                     <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-red-50 transition-colors">
                       {isAssessmentOpen ? (
                         <ChevronUp className="w-4 h-4" />
@@ -470,12 +476,63 @@ export default function App() {
                   </button>
                   <div 
                     className={`transition-all duration-500 overflow-hidden ${
-                      isAssessmentOpen ? 'max-h-[500px] opacity-100 pb-4' : 'max-h-0 opacity-0'
+                      isAssessmentOpen ? 'max-h-[1200px] opacity-100 pb-4' : 'max-h-0 opacity-0'
                     }`}
                   >
-                    <p className="text-sm text-gray-600 leading-relaxed bg-gray-50 p-6 rounded-2xl">
-                      Screening looks at whether the core business is permissible, and whether financial ratios — such as interest-bearing debt and interest income — stay within applicable limits. Where a small portion of income is non-permissible, a purification ratio may apply to dividends; this is set and communicated periodically, and should not be assumed to be zero.
-                    </p>
+                    <div className="bg-[#FAF8F5] border border-stone-200/70 p-6 sm:p-8 rounded-2xl text-gray-800 space-y-5 shadow-xs">
+                      {/* Certificate Header */}
+                      <div className="border-b border-stone-200 pb-4">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-[11px] font-bold tracking-widest text-[#C10202] uppercase">
+                            FRACE CERTIFICATE
+                          </span>
+                          <span className="text-[11px] font-medium text-gray-500">
+                            Central Bank of Nigeria
+                          </span>
+                        </div>
+                        <h4 className="text-xs sm:text-sm font-bold text-gray-900 leading-snug tracking-tight uppercase">
+                          Statement of Shari'ah Certification by the Financial Regulation Advisory Council of Experts (FRACE) of the Central Bank of Nigeria in respect of the Proposed Initial Public Offering of Dangote Petroleum Refinery & Petrochemicals FZE
+                        </h4>
+                      </div>
+
+                      {/* Official Statement Body */}
+                      <div className="space-y-3.5 text-xs sm:text-[13px] text-gray-700 leading-relaxed">
+                        <p>
+                          The Financial Regulation Advisory Council of Experts (FRACE) of the Central Bank of Nigeria has considered the proposed Initial Public Offering (IPO) of up to 4,100,000,000 ordinary shares of Dangote Petroleum Refinery & Petrochemicals Free Zone Enterprise (DPRP).
+                        </p>
+                        <p>
+                          FRACE notes that Buraq Capital Limited, acting as Shari'ah Adviser to the Offer, conducted a Shari'ah assessment of the issuer and the proposed offering and presented its findings to the Council.
+                        </p>
+                        <p>
+                          Based on the information, disclosures, representations, and Shari'ah assessment presented to the Council, FRACE is of the opinion that the proposed IPO is consistent with the applicable principles and requirements of Shari'ah relating to equity participation in lawful business activities.
+                        </p>
+                        <p className="font-medium text-gray-900">
+                          Accordingly, FRACE has no objection, from a Shari'ah perspective to the proposed Initial Public Offering of Dangote Petroleum Refinery & Petrochemicals FZE and hereby issues this Certificate of Shari'ah Compliance in respect thereof.
+                        </p>
+                        <p className="italic text-gray-600 pt-1">
+                          And Allah knows best.
+                        </p>
+                      </div>
+
+                      {/* Council Signatories */}
+                      <div className="pt-4 border-t border-stone-200 text-xs">
+                        <p className="text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-2.5">
+                          Council of Experts:
+                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-gray-700">
+                          <div>1. Sheikh Shariff Ibrahim Saleh Al Husaini <span className="text-gray-500 font-medium">(Chairman)</span></div>
+                          <div>2. Prof. Bashir Aliyu Umar <span className="text-gray-500 font-medium">(Deputy Chairman)</span></div>
+                          <div>3. Datuk Prof. Mohammad Akram Laldin <span className="text-gray-500 font-medium">(Member)</span></div>
+                          <div>4. Prof. Abdul-Razzaq Abdul-Majeed Alaro <span className="text-gray-500 font-medium">(Member)</span></div>
+                          <div>5. Dr. Mohammed Burhan Arbouna <span className="text-gray-500 font-medium">(Member)</span></div>
+                          <div>6. Prof. Usman Muhammad Shu'aib <span className="text-gray-500 font-medium">(Member)</span></div>
+                          <div>7. Dr. Umar A. Oseni <span className="text-gray-500 font-medium">(Member)</span></div>
+                        </div>
+                        <p className="mt-4 pt-3 border-t border-stone-200/50 text-[11px] font-semibold text-gray-600">
+                          Dated this 3rd Day of September 2026
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -603,7 +660,7 @@ export default function App() {
               
               <div className="pt-4">
                 <a
-                  href={LOTUS_BETA_URL}
+                  href={DANGOTE_PROSPECTUS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-sm text-[#C10202] bg-red-50 hover:bg-red-100 transition-colors shadow-sm cursor-pointer border border-red-100 group"
@@ -624,6 +681,7 @@ export default function App() {
                 <li className="pl-1">The shares may trade below the offer price after listing.</li>
                 <li className="pl-1">Allotment is not guaranteed and may differ from the amount applied for.</li>
                 <li className="pl-1">Past or projected performance does not guarantee future returns.</li>
+                <li className="pl-1">Your application on LOTUS Wealth is being submitted through CardinalStone Securities.</li>
                 <li className="pl-1">Applications must be complete, successful and submitted through the designated route to be attributed to Lotus Wealth.</li>
               </ul>
               <div className="mt-8 pt-6 border-t border-red-100">
@@ -659,7 +717,7 @@ export default function App() {
                     Your Investment Journey
                   </p>
                   <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-tight">
-                    LOTUS Wealth (coming soon)
+                    LOTUS Wealth
                   </h2>
                   <p className="text-xs sm:text-sm text-gray-300 mt-2 max-w-lg leading-relaxed">
                     Your gateway to ethical investment opportunities.
@@ -685,12 +743,12 @@ export default function App() {
                 {/* Direct CTA */}
                 <div className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                   <a
-                    href={LOTUS_BETA_URL}
+                    href={LOTUS_REGISTER_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="py-2 px-4 rounded-lg font-medium text-xs text-white bg-[#C10202] hover:bg-[#a00202] transition-colors inline-flex items-center justify-center gap-1.5 shadow-md cursor-pointer w-fit"
                   >
-                    <span>Learn more</span>
+                    <span>Sign Up</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </a>
                 </div>
@@ -709,50 +767,8 @@ export default function App() {
       {/* SECTION: QUESTIONS? WE'VE GOT YOU. - FAQs                     */}
       {/* ------------------------------------------------------------- */}
       <div id="faq">
-        <FAQSection onOpenSubscribe={() => window.open(LOTUS_BETA_URL, '_blank', 'noopener,noreferrer')} />
+        <FAQSection onOpenSubscribe={() => window.open(LOTUS_REGISTER_URL, '_blank', 'noopener,noreferrer')} />
       </div>
-
-      {/* ------------------------------------------------------------- */}
-      {/* SECTION: FINAL CTA BANNER                                     */}
-      {/* ------------------------------------------------------------- */}
-      <section className="bg-[#FAF7F2] py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto rounded-[32px] overflow-hidden bg-[#242221] text-white relative shadow-xl p-8 sm:p-12 lg:p-14 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-          {/* Subtle Red Gradient Background Mesh */}
-          <div className="absolute top-0 right-0 w-[80%] lg:w-1/2 h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#CC4024]/30 via-transparent to-transparent pointer-events-none" />
-
-          {/* Left Column: Heading + Body + CTA Button */}
-          <div className="space-y-4 max-w-xl relative z-10">
-            <p className="text-[#CC4024] text-[10px] font-bold tracking-[0.2em] uppercase">
-              THE OFFER IS OPEN NOW
-            </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
-              Be part of what's next.
-            </h2>
-            <p className="text-sm sm:text-base text-gray-300">
-              Open your account and subscribe before 13 October 2026.
-            </p>
-            <div className="pt-2">
-              <a
-                href={LOTUS_BETA_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 py-3.5 px-7 rounded-xl font-bold text-sm text-white bg-[#C10202] hover:bg-[#a00202] transition-colors cursor-pointer shadow-lg hover:shadow-xl hover:-translate-y-0.5 group"
-              >
-                <span>Subscribe to the Dangote IPO</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </div>
-          </div>
-
-          {/* Right Column: Subtle Brand Pillar Text */}
-          <div className="flex flex-col text-left lg:text-right space-y-2 text-gray-400 text-sm relative z-10">
-            <span className="hover:text-white transition-colors cursor-default">People</span>
-            <span className="hover:text-white transition-colors cursor-default">Industry</span>
-            <span className="hover:text-white transition-colors cursor-default">Opportunity</span>
-            <span className="text-white font-bold pt-1">A brighter tomorrow</span>
-          </div>
-        </div>
-      </section>
 
       {/* ------------------------------------------------------------- */}
       {/* SIMPLE FOOTER                                                 */}

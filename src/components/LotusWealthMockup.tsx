@@ -8,9 +8,6 @@ import {
   ArrowUpRight,
   ArrowDownLeft,
   Lock,
-  Building2,
-  Coins,
-  FileText,
   Home,
   Compass,
   PieChart,
@@ -22,7 +19,6 @@ import {
 export const LotusWealthMockup: React.FC<{ className?: string }> = ({ className = '' }) => {
   const [showBalance, setShowBalance] = useState(true);
   const [activeTab, setActiveTab] = useState<'performance' | 'diversity'>('performance');
-  const [selectedAsset, setSelectedAsset] = useState<'sukuk' | 'gold' | 'real-estate'>('sukuk');
 
   return (
     <div className={`relative max-w-[360px] mx-auto select-none ${className}`}>
@@ -192,60 +188,6 @@ export const LotusWealthMockup: React.FC<{ className?: string }> = ({ className 
             </div>
           </div>
 
-          {/* Ethical Investment Options (Sukuk, Gold, Real Estate) */}
-          <div className="px-5 pt-2">
-            <div className="flex items-center justify-between text-[11px] font-bold text-gray-800 mb-2">
-              <span>Investment Options</span>
-              <span className="text-[10px] text-[#C10202] font-semibold">Halal & Transparent</span>
-            </div>
-
-            <div className="grid grid-cols-3 gap-2">
-              <button
-                onClick={() => setSelectedAsset('sukuk')}
-                className={`p-2 rounded-xl border text-left transition-all ${
-                  selectedAsset === 'sukuk'
-                    ? 'border-[#C10202] bg-red-50/50 shadow-sm'
-                    : 'border-gray-100 bg-gray-50/70 hover:border-gray-200'
-                }`}
-              >
-                <div className="w-6 h-6 rounded-lg bg-amber-100 flex items-center justify-center text-amber-800 mb-1">
-                  <FileText className="w-3.5 h-3.5" />
-                </div>
-                <div className="text-[10px] font-bold text-gray-900 leading-tight">Sukuk</div>
-                <div className="text-[8px] text-gray-500 truncate mt-0.5">Fixed income</div>
-              </button>
-
-              <button
-                onClick={() => setSelectedAsset('gold')}
-                className={`p-2 rounded-xl border text-left transition-all ${
-                  selectedAsset === 'gold'
-                    ? 'border-[#C10202] bg-red-50/50 shadow-sm'
-                    : 'border-gray-100 bg-gray-50/70 hover:border-gray-200'
-                }`}
-              >
-                <div className="w-6 h-6 rounded-lg bg-yellow-100 flex items-center justify-center text-yellow-800 mb-1">
-                  <Coins className="w-3.5 h-3.5" />
-                </div>
-                <div className="text-[10px] font-bold text-gray-900 leading-tight">Gold</div>
-                <div className="text-[8px] text-gray-500 truncate mt-0.5">Inflation hedge</div>
-              </button>
-
-              <button
-                onClick={() => setSelectedAsset('real-estate')}
-                className={`p-2 rounded-xl border text-left transition-all ${
-                  selectedAsset === 'real-estate'
-                    ? 'border-[#C10202] bg-red-50/50 shadow-sm'
-                    : 'border-gray-100 bg-gray-50/70 hover:border-gray-200'
-                }`}
-              >
-                <div className="w-6 h-6 rounded-lg bg-emerald-100 flex items-center justify-center text-emerald-800 mb-1">
-                  <Building2 className="w-3.5 h-3.5" />
-                </div>
-                <div className="text-[10px] font-bold text-gray-900 leading-tight">Real Estate</div>
-                <div className="text-[8px] text-gray-500 truncate mt-0.5">Tangible asset</div>
-              </button>
-            </div>
-          </div>
 
           {/* Bottom App Navigation Bar */}
           <div className="px-6 pt-4 pb-1 border-t border-gray-100 mt-3 flex justify-between items-center text-gray-400">

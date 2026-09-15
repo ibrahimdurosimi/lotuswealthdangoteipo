@@ -304,7 +304,7 @@ export const SubscribeModal: React.FC<SubscribeModalProps> = ({
             </p>
 
             <a
-              href="https://beta.lotuswealth.lotuscapitallimited.com/"
+              href="https://beta.lotuswealth.lotuscapitallimited.com/register"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full py-3 px-4 rounded-xl font-bold text-sm bg-[#C10202] hover:bg-[#a00202] text-white transition-colors flex items-center justify-center gap-2 shadow-lg shadow-red-900/40 cursor-pointer"
