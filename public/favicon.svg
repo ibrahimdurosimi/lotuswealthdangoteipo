@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="100%" height="100%">
+  <!-- Lotus Wealth Stylized Ribbon Mark -->
+  <!-- Top fold down-left -->
+  <polygon points="122,12 142,12 36,74 16,74" fill="#C10202" />
+  <!-- Fold across to spine -->
+  <polygon points="16,74 36,74 130,58 130,86 16,102" fill="#8B0C10" />
+  <!-- Spine vertical connection -->
+  <polygon points="130,58 130,86 122,172 114,172" fill="#9E0D12" />
+  
+  <!-- Lower left band -->
+  <polygon points="6,128 36,128 116,192 116,218 6,154" fill="#840B0E" />
+  
+  <!-- Bottom Left arm of V -->
+  <polygon points="6,204 36,204 122,228 122,254 6,230" fill="#840B0E" />
+  
+  <!-- Right upper wing bar -->
+  <polygon points="124,142 144,142 248,78 228,78" fill="#C10202" />
+  
+  <!-- Right middle wing bar -->
+  <polygon points="124,202 144,202 248,138 228,138" fill="#C10202" />
+  
+  <!-- Right bottom arm of V -->
+  <polygon points="122,228 122,254 248,178 228,178" fill="#B00202" />
+  
+  <!-- Bottom center anchor triangle -->
+  <polygon points="113,250 131,250 122,238" fill="#222222" />
+</svg>

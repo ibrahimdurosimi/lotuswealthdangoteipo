@@ -47,12 +47,12 @@ export const LotusWealthMockup: React.FC<{ className?: string }> = ({ className 
           <div className="px-6 py-2.5 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="relative w-10 h-10 rounded-full bg-amber-100 overflow-hidden ring-2 ring-[#C10202]/30 flex items-center justify-center text-amber-900 font-bold text-sm">
-                <span>OD</span>
+                <span>AM</span>
               </div>
               <div>
                 <p className="text-[11px] text-gray-400 font-medium">Welcome back,</p>
                 <h4 className="text-[14px] font-bold text-gray-900 leading-tight">
-                  Hello, Oladapo!
+                  Hello, Amir!
                 </h4>
               </div>
             </div>
@@ -83,7 +83,7 @@ export const LotusWealthMockup: React.FC<{ className?: string }> = ({ className 
             {/* Quick Action Buttons */}
             <div className="grid grid-cols-2 gap-2.5 mt-3">
               <a
-                href="https://beta.lotuswealth.lotuscapitallimited.com/"
+                href="https://app.getlotuswealth.com/register"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-full bg-gray-900 text-white text-[11px] font-semibold hover:bg-black transition-colors cursor-pointer"
@@ -92,7 +92,7 @@ export const LotusWealthMockup: React.FC<{ className?: string }> = ({ className 
                 <span>Fund Wallet</span>
               </a>
               <a
-                href="https://beta.lotuswealth.lotuscapitallimited.com/"
+                href="https://app.getlotuswealth.com/register"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-full bg-[#C10202] text-white text-[11px] font-semibold hover:bg-[#a00202] transition-colors shadow-sm shadow-red-500/30 cursor-pointer"

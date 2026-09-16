@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 80" fill="none" width="100%" height="100%">
+  <!-- Origami Icon -->
+  <g transform="translate(2, 6) scale(0.85)">
+    <!-- Top left ribbon fold (bright red) -->
+    <polygon points="0,22 45,0 80,18 40,32 0,22" fill="#C10202" />
+    <!-- Top-mid fold shadow (dark red) -->
+    <polygon points="0,22 40,32 35,42 0,22" fill="#840B0E" />
+    <!-- Center vertical folding ribbon (crimson) -->
+    <polygon points="40,32 45,68 35,68 35,42" fill="#9E0D12" />
+    <!-- Bottom base triangle (dark charcoal) -->
+    <polygon points="40,74 45,82 35,82" fill="#222222" />
+    <!-- Left bottom wing (crimson/burgundy) -->
+    <polygon points="0,52 35,68 0,82 0,68" fill="#8B0C10" />
+    <!-- Upper right diagonal rising ribbon (bright red) -->
+    <polygon points="45,45 80,26 80,38 45,56" fill="#C10202" />
+    <!-- Lower right diagonal rising ribbon (bright red) -->
+    <polygon points="45,63 80,44 80,56 45,74" fill="#C10202" />
+  </g>
+
+  <!-- Wordmark LOTUS WEALTH -->
+  <text x="86" y="61" 
+        fill="#232323" 
+        font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" 
+        font-size="46" 
+        font-weight="900" 
+        letter-spacing="-0.02em">LOTUS WEALTH</text>
+</svg>

@@ -11,7 +11,7 @@ const FAQS_COL_1: FAQItem[] = [
     id: 'faq-1',
     question: 'What is Dangote Petroleum Refinery & Petrochemicals FZE?',
     answer:
-      'Dangote Petroleum Refinery & Petrochemicals FZE is the company offering ordinary shares through this public offer. The refinery is located in the Lekki Free Zone, Lagos. Full details are contained in the official prospectus.',
+      'Dangote Petroleum Refinery & Petrochemicals FZE is the issuer of the ordinary shares being offered to the public. The company owns and operates the Dangote Petroleum Refinery, located in the Lekki Free Trade Zone, Lagos. Investors should refer to the Prospectus for detailed information about the company, its business, operations, risks, and the terms of the Offer.',
   },
   {
     id: 'faq-2',
@@ -44,7 +44,7 @@ const FAQS_COL_2: FAQItem[] = [
     id: 'faq-6',
     question: 'Where will I complete my application?',
     answer:
-      "Applications are completed securely through the CardinalStone IPO platform via LOTUS Wealth's dedicated application link.",
+      "Applications are completed securely through the CardinalStone Securities IPO platform via LOTUS Wealth's dedicated application link.",
   },
   {
     id: 'faq-7',
@@ -54,9 +54,9 @@ const FAQS_COL_2: FAQItem[] = [
   },
   {
     id: 'faq-8',
-    question: 'Is this a good investment?',
+    question: 'Is this a suitable investment for me?',
     answer:
-      'Every investment carries risk. Review the prospectus and offer documents and consider your investment appetite before investing. If in doubt, seek independent professional advice.',
+      'Every investment carries risks and may not be suitable for all investors. Before investing, carefully review the Prospectus and consider your investment objectives, financial circumstances and risk tolerance. If you are uncertain whether this investment is appropriate for you, please seek independent professional advice.',
   },
   {
     id: 'faq-9',
@@ -68,7 +68,7 @@ const FAQS_COL_2: FAQItem[] = [
     id: 'faq-10',
     question: 'When does the offer close?',
     answer:
-      'The reported closing date for the offer is Tuesday October 13, 2026.',
+      'The offer will close on Tuesday October 13, 2026.',
   },
 ];
 
@@ -93,7 +93,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenSubscribe }) => {
             </h2>
           </div>
           <a
-            href="https://beta.lotuswealth.lotuscapitallimited.com/register"
+            href="https://app.getlotuswealth.com/register"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-gray-800 text-xs font-semibold transition-colors cursor-pointer"
@@ -178,6 +178,29 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenSubscribe }) => {
               );
             })}
           </div>
+        </div>
+
+        {/* Live WhatsApp Support Banner */}
+        <div className="mt-12 p-6 rounded-2xl bg-[#FFF8F8] border border-red-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <h4 className="text-sm sm:text-base font-bold text-gray-900">
+              Still have questions about the Dangote Refinery IPO?
+            </h4>
+            <p className="text-xs sm:text-sm text-gray-600 mt-1">
+              Our dedicated investment support desk is active and ready to assist you on WhatsApp.
+            </p>
+          </div>
+          <a
+            href="https://wa.me/2347081108201?text=Hello%20Lotus%20Wealth%2C%20I%20have%20an%20inquiry%20regarding%20the%20Dangote%20Refinery%20IPO."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white text-xs sm:text-sm font-semibold transition-colors shrink-0 shadow-sm cursor-pointer"
+          >
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.8 14.16c-.24.68-1.4 1.25-1.92 1.33-.51.08-1.18.11-1.91-.12-.45-.14-1.04-.34-1.79-.67-3.17-1.38-5.23-4.59-5.39-4.8-.16-.21-1.28-1.7-1.28-3.25 0-1.54.81-2.3 1.1-2.6.29-.3.64-.37.85-.37.21 0 .43 0 .62.01.2.01.47-.08.73.56.27.65.91 2.22.99 2.38.08.16.14.35.03.56-.11.22-.16.35-.32.54-.16.19-.34.42-.49.57-.16.16-.33.34-.14.66.19.32.84 1.38 1.8 2.23 1.24 1.1 2.28 1.44 2.6 1.6.32.16.51.14.7-.08.19-.22.81-.94 1.03-1.26.21-.32.43-.27.73-.16.29.11 1.87.88 2.19 1.04.32.16.54.24.62.38.08.14.08.8-.16 1.48z"/>
+            </svg>
+            <span>Chat on WhatsApp</span>
+          </a>
         </div>
       </div>
     </section>

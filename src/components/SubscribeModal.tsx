@@ -252,7 +252,7 @@ export const SubscribeModal: React.FC<SubscribeModalProps> = ({
             <div className="p-3 rounded-xl bg-gray-900/90 border border-gray-800 text-[11px] text-gray-400 flex items-start gap-2">
               <ShieldCheck className="w-4 h-4 text-[#C10202] flex-shrink-0 mt-0.5" />
               <span>
-                Your subscription is processed through Lotus Capital Limited (SEC-regulated Issuing House) and CardinalStone Securities Limited (Dealing Member NGX).
+                Lotus Wealth is a licensed digital sub-brokerage platform. Applications submitted through Lotus Wealth are processed by its sponsoring broker, CardinalStone Securities Ltd.
               </span>
             </div>
 
@@ -304,7 +304,7 @@ export const SubscribeModal: React.FC<SubscribeModalProps> = ({
             </p>
 
             <a
-              href="https://beta.lotuswealth.lotuscapitallimited.com/register"
+              href="https://app.getlotuswealth.com/register"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full py-3 px-4 rounded-xl font-bold text-sm bg-[#C10202] hover:bg-[#a00202] text-white transition-colors flex items-center justify-center gap-2 shadow-lg shadow-red-900/40 cursor-pointer"

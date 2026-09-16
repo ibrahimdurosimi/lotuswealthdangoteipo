@@ -18,9 +18,14 @@ import WaitlistForm from './components/WaitlistForm';
 import SubscribeModal from './components/SubscribeModal';
 import ResearchModal from './components/ResearchModal';
 import { AboutLotusModal } from './components/AboutLotusModal';
+import { WhyItMattersSection } from './components/WhyItMattersSection';
+import { HowToParticipateSection } from './components/HowToParticipateSection';
+import { PartnershipSection } from './components/PartnershipSection';
 import FAQSection from './components/FAQSection';
 
-const LOTUS_REGISTER_URL = 'https://beta.lotuswealth.lotuscapitallimited.com/register';
+const LOTUS_REGISTER_URL = 'https://app.getlotuswealth.com/register';
+const LOTUS_LOGIN_URL = 'https://app.getlotuswealth.com/login';
+const WHATSAPP_SUPPORT_URL = 'https://wa.me/2347081108201?text=Hello%20Lotus%20Wealth%2C%20I%20have%20an%20inquiry%20regarding%20the%20Dangote%20Refinery%20IPO.';
 const DANGOTE_PROSPECTUS_URL = 'https://ipo.dangote.com/prospectus.pdf';
 
 export default function App() {
@@ -42,13 +47,22 @@ export default function App() {
   // Accordion state for new sections
   const [isAssessmentOpen, setIsAssessmentOpen] = useState(false);
 
-  // Live countdown timer state (Offer closes in 29 days, 10 hrs, 19 min, 19 sec)
-  const [timeLeft, setTimeLeft] = useState({
-    days: 29,
-    hours: 10,
-    minutes: 19,
-    seconds: 19,
-  });
+  // Target offer close date: Oct 13th 2026 23:59:59 WAT (West Africa Time, GMT+1)
+  const calculateTimeLeft = () => {
+    const target = new Date('2026-10-13T23:59:59+01:00').getTime();
+    const now = Date.now();
+    const difference = Math.max(0, target - now);
+
+    return {
+      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+      minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+      seconds: Math.floor((difference % (1000 * 60)) / 1000),
+    };
+  };
+
+  // Live countdown timer state
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,18 +76,7 @@ export default function App() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev.seconds > 0) {
-          return { ...prev, seconds: prev.seconds - 1 };
-        } else if (prev.minutes > 0) {
-          return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
-        } else if (prev.hours > 0) {
-          return { ...prev, hours: prev.hours - 1, minutes: 59, seconds: 59 };
-        } else if (prev.days > 0) {
-          return { ...prev, days: prev.days - 1, hours: 23, minutes: 59, seconds: 59 };
-        }
-        return prev;
-      });
+      setTimeLeft(calculateTimeLeft());
     }, 1000);
 
     return () => clearInterval(timer);
@@ -104,7 +107,7 @@ export default function App() {
               <span style={{ color: '#000000' }}>In partnership with</span>
               <CardinalStoneLogo size="sm" showText={false} />
               <span className="font-semibold" style={{ color: '#000000' }}>
-                CardinalStone
+                CardinalStone Securities
               </span>
             </div>
           </div>
@@ -119,7 +122,16 @@ export default function App() {
           </nav>
 
           {/* Action CTA & Mobile Toggle */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <a
+              href={LOTUS_LOGIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex py-2 px-3.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-700 hover:text-[#C10202] hover:bg-gray-50 border border-gray-200 transition-colors items-center gap-1 cursor-pointer"
+            >
+              <span>Sign In</span>
+            </a>
+
             <a
               href={LOTUS_REGISTER_URL}
               target="_blank"
@@ -173,7 +185,16 @@ export default function App() {
               >
                 FAQ
               </a>
-              <div className="pt-2 border-t border-gray-100">
+              <div className="pt-2 border-t border-gray-100 flex flex-col gap-2">
+                <a
+                  href={LOTUS_LOGIN_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-full py-2.5 rounded-xl text-sm font-semibold text-gray-700 bg-gray-50 hover:bg-gray-100 border border-gray-200 transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer"
+                >
+                  <span>Sign In</span>
+                </a>
                 <a
                   href={LOTUS_REGISTER_URL}
                   target="_blank"
@@ -197,12 +218,22 @@ export default function App() {
         id="top"
         className="relative min-h-[720px] lg:min-h-[820px] flex flex-col justify-between overflow-hidden"
         style={{
-          backgroundImage: `linear-gradient(90deg, rgba(8, 13, 20, 0.95) 0%, rgba(193, 2, 2, 0.20) 45%, rgba(8, 13, 20, 0.55) 75%, rgba(8, 13, 20, 0.75) 100%), url(/dangote-refinery-hero.jpg)`,
+          backgroundImage: `linear-gradient(90deg, rgba(8, 13, 20, 0.96) 0%, rgba(10, 16, 26, 0.88) 45%, rgba(14, 20, 32, 0.72) 80%, rgba(8, 13, 20, 0.85) 100%), url(/dangote-refinery-hero.jpg)`,
           backgroundPosition: 'center center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
         }}
       >
+        {/* Right Hero Artwork (Option A - Crisp Graphic Cutout) */}
+        <div className="hidden lg:flex absolute right-0 xl:right-8 bottom-0 top-8 items-end justify-end pointer-events-none z-0 w-[46%] max-w-[580px] overflow-hidden">
+          <img
+            src="/hero-refinery.png"
+            alt="Own a piece of Dangote Petroleum Refinery"
+            className="h-[94%] max-h-[800px] w-auto object-contain object-bottom select-none filter drop-shadow-[0_25px_50px_rgba(0,0,0,0.9)] opacity-95"
+            referrerPolicy="no-referrer"
+          />
+        </div>
+
         {/* Main Hero Container */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-16 pb-12 w-full my-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
@@ -216,38 +247,45 @@ export default function App() {
                 </span>
               </div>
 
-              {/* Main Headline with exact styling from CSS 1 */}
+              {/* Main Headline with responsive typography for mobile and desktop */}
               <h1
-                className="font-bold tracking-tight text-white"
+                className="font-bold tracking-tight text-white text-3xl sm:text-5xl md:text-6xl lg:text-[85px] xl:text-[90px] leading-[1.12] sm:leading-[1.08] lg:leading-[84px]"
                 style={{
-                  fontSize: '90px',
-                  lineHeight: '84px',
                   textAlign: 'left',
                   fontStyle: 'normal',
-                  fontFamily: 'Arial',
+                  fontFamily: 'Arial, sans-serif',
                   textDecorationLine: 'none',
                 }}
               >
-                Don't just buy fuel. <br />
-                <span className="text-white">Own a piece of a Refinery</span>
+                Don't just buy fuel. <br className="hidden sm:inline" />
+                <span className="text-white">Own a piece of the Refinery</span>
               </h1>
 
-              {/* Subtitle with exact styling from CSS 2 */}
+              {/* Subtitle with responsive styling */}
               <p
-                className="text-gray-200 max-w-xl leading-relaxed"
-                style={{ fontSize: '19px', fontWeight: 'normal', lineHeight: '30px' }}
+                className="text-gray-200 max-w-xl text-base sm:text-lg lg:text-[19px] leading-relaxed lg:leading-[30px]"
+                style={{ fontWeight: 'normal' }}
               >
-                Participate in the Dangote Petroleum Refinery Initial Public Offer through LOTUS Wealth in partnership with CardinalStone Securities.
+                Participate in the Dangote Petroleum Refinery Initial Public Offer through LOTUS Wealth in partnership with{' '}
+                <strong className="font-bold text-white text-lg sm:text-xl lg:text-[21px] tracking-tight">
+                  CardinalStone Securities
+                </strong>
+                .
               </p>
 
               {/* Countdown Timer Block with exact styling from CSS 3 */}
               <div className="pt-2">
-                <p
-                  className="font-semibold mb-3"
-                  style={{ fontSize: '18px', color: '#ffffff', fontFamily: 'Arial', fontWeight: 'normal' }}
-                >
-                  Offer closes in
-                </p>
+                <div className="flex items-center gap-2 mb-3">
+                  <p
+                    className="font-semibold"
+                    style={{ fontSize: '18px', color: '#ffffff', fontFamily: 'Arial', fontWeight: 'normal' }}
+                  >
+                    Offer closes on
+                  </p>
+                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-white/10 text-white/90 font-medium border border-white/10">
+                    Oct 13th, 2026
+                  </span>
+                </div>
                 <div className="flex items-center gap-3 sm:gap-4">
                   {/* Days */}
                   <div className="flex flex-col items-center justify-center w-16 sm:w-20 h-16 sm:h-20 rounded-xl bg-black/60 border border-white/15 backdrop-blur-sm">
@@ -294,6 +332,16 @@ export default function App() {
 
             {/* Right Hero Column: Offer Highlights Card */}
             <div className="lg:col-span-4 lg:col-start-9 max-w-md w-full ml-auto">
+              {/* Mobile Art preview */}
+              <div className="lg:hidden flex justify-center pt-4 pb-2">
+                <img
+                  src="/hero-refinery.png"
+                  alt="Own a piece of Dangote Refinery"
+                  className="h-60 sm:h-72 w-auto object-contain select-none filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.8)]"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+
               <div className="relative rounded-2xl p-6 sm:p-7 shadow-xl border border-gray-200 text-gray-900 bg-white transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl">
                 <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-gray-900 mb-6">
                   Offer Highlights
@@ -327,7 +375,7 @@ export default function App() {
                   </div>
                   <div className="flex justify-between items-end pb-3">
                     <div className="text-sm text-gray-500">Offer closes</div>
-                    <div className="text-lg font-bold text-[#C10202]">13 Oct 2026</div>
+                    <div className="text-lg font-bold text-[#C10202]">Oct 13th, 2026</div>
                   </div>
                 </div>
 
@@ -340,6 +388,19 @@ export default function App() {
                   <span>Sign Up to Apply</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </a>
+
+                {/* Sign In helper */}
+                <div className="text-center mt-2.5">
+                  <span className="text-xs text-gray-500">Already have an account? </span>
+                  <a
+                    href={LOTUS_LOGIN_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-semibold text-[#C10202] hover:underline cursor-pointer"
+                  >
+                    Sign In
+                  </a>
+                </div>
                 
                 <a
                   href={DANGOTE_PROSPECTUS_URL}
@@ -357,13 +418,13 @@ export default function App() {
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* Ticker / Marquee Section                                      */}
+      {/* Ticker / Marquee Section (Above Partnership)                  */}
       {/* ------------------------------------------------------------- */}
       <div className="bg-[#C10202] text-white py-2 overflow-hidden flex whitespace-nowrap text-sm font-medium relative">
         <div className="animate-marquee flex gap-8 shrink-0 min-w-full">
           <span className="px-4">🚀 IPO Status: LIVE</span>
           <span className="px-4">•</span>
-          <span className="px-4">Offer closes: 13 Oct 2026</span>
+          <span className="px-4">Offer closes on Oct 13th, 2026</span>
           <span className="px-4">•</span>
           <span className="px-4">Minimum application: 10 shares (₦5,250)</span>
           <span className="px-4">•</span>
@@ -371,7 +432,7 @@ export default function App() {
           <span className="px-4">•</span>
           <span className="px-4">🚀 IPO Status: LIVE</span>
           <span className="px-4">•</span>
-          <span className="px-4">Offer closes: 13 Oct 2026</span>
+          <span className="px-4">Offer closes on Oct 13th, 2026</span>
           <span className="px-4">•</span>
           <span className="px-4">Minimum application: 10 shares (₦5,250)</span>
           <span className="px-4">•</span>
@@ -380,65 +441,14 @@ export default function App() {
       </div>
 
       {/* ------------------------------------------------------------- */}
-      {/* SECTION: WHY IT MATTERS                                       */}
+      {/* SECTION: PARTNERSHIP WITH CARDINALSTONE                        */}
       {/* ------------------------------------------------------------- */}
-      <section className="py-20 lg:py-24 bg-white text-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-12">
-            <p className="text-[#C10202] text-xs font-bold tracking-[0.2em] uppercase mb-4">
-              Why It Matters
-            </p>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 tracking-tight leading-tight">
-              A rare kind of opportunity.
-            </h2>
-          </div>
+      <PartnershipSection />
 
-          {/* 3-Column Balanced Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-            {/* Card 1 */}
-            <div className="bg-[#F9FAFB] rounded-2xl p-8 relative transition-all duration-300 hover:shadow-md border border-transparent hover:border-gray-100 flex flex-col">
-              <div className="flex items-center justify-between mb-6">
-                <div className="w-10 h-10 rounded bg-white border border-red-100 flex items-center justify-center" aria-hidden="true">
-                  <Factory className="w-5 h-5 text-[#C10202]" />
-                </div>
-                <span className="text-[#D4B58C] font-bold text-xl" aria-hidden="true">01</span>
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-3">A Historic Capital Market Milestone</h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Set to be the largest industrial IPO on the continent, this offering opens the door to ownership in one of the world’s largest single-train refineries.
-              </p>
-            </div>
-
-            {/* Card 2 */}
-            <div className="bg-[#F9FAFB] rounded-2xl p-8 relative transition-all duration-300 hover:shadow-md border border-transparent hover:border-gray-100 flex flex-col">
-              <div className="flex items-center justify-between mb-6">
-                <div className="w-10 h-10 rounded bg-white border border-red-100 flex items-center justify-center" aria-hidden="true">
-                  <FileText className="w-5 h-5 text-[#C10202]" />
-                </div>
-                <span className="text-[#D4B58C] font-bold text-xl" aria-hidden="true">02</span>
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-3">Invest in Strategic Economic Sector</h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Gain exposure to a strategic industrial asset underpinned by physical infrastructure, operational capacity, and long-term economic value creation.
-              </p>
-            </div>
-
-            {/* Card 3 */}
-            <div className="bg-[#F9FAFB] rounded-2xl p-8 relative transition-all duration-300 hover:shadow-md border border-transparent hover:border-gray-100 flex flex-col">
-              <div className="flex items-center justify-between mb-6">
-                <div className="w-10 h-10 rounded bg-white border border-red-100 flex items-center justify-center" aria-hidden="true">
-                  <Users className="w-5 h-5 text-[#C10202]" />
-                </div>
-                <span className="text-[#D4B58C] font-bold text-xl" aria-hidden="true">03</span>
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-3">Designed for Broad Participation</h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                Starting from just ₦5,250, investors of all sizes can take part in an opportunity that was once accessible only to institutional capital.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ------------------------------------------------------------- */}
+      {/* SECTION: WHY IT MATTERS (Mobile Slider, Desktop Grid)         */}
+      {/* ------------------------------------------------------------- */}
+      <WhyItMattersSection />
 
       {/* ------------------------------------------------------------- */}
       {/* SECTION: SHARI'AH COMPLIANCE STATUS                           */}
@@ -449,11 +459,8 @@ export default function App() {
             
             {/* Left Column: Heading */}
             <div className="lg:col-span-5 lg:sticky lg:top-32">
-              <p className="text-[#C10202] text-xs font-bold tracking-[0.2em] uppercase mb-4">
-                For Shari'ah-Conscious Investors
-              </p>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 tracking-tight leading-tight mb-6">
-                Shari'ah compliance status.
+                Certified Shari'ah-Compliant Investment Opportunity
               </h2>
               <p className="text-gray-600 text-sm leading-relaxed max-w-md">
                 We are committed to providing transparent information for investors who prioritize ethical and Shari'ah-compliant opportunities.
@@ -465,11 +472,11 @@ export default function App() {
               <div className="bg-white rounded-3xl p-8 sm:p-10 shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md">
                 <div className="inline-flex items-center gap-2 bg-[#1B8A46] text-white text-xs font-bold px-5 py-2 rounded-full mb-8">
                   <CheckCircle2 className="w-4 h-4" />
-                  Currently Shari'ah-compliant
+                  Certified Shari'ah-Compliant
                 </div>
                 
                 <p className="text-[15px] text-gray-700 leading-relaxed mb-8">
-                  Based on screening of the company's business activity and financial ratios, the shares are currently classified as Shari'ah-compliant. Compliance is not permanent: it is reviewed periodically and can change if the company's debt, income mix or activities shift outside applicable thresholds.
+                  This offer has been reviewed by the Financial Regulation Advisory Council of Experts (FRACE) of the Central Bank of Nigeria and has been certified as compliant with the Shari'ah.
                 </p>
                 
                 <div className="pt-2 border-t border-gray-100">
@@ -559,100 +566,9 @@ export default function App() {
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* SECTION: HOW TO PARTICIPATE                                   */}
+      {/* SECTION: HOW TO PARTICIPATE (Mobile Slider, Desktop 5-Col)    */}
       {/* ------------------------------------------------------------- */}
-      <section id="how-it-works" className="py-20 lg:py-24 bg-white text-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-[#C10202] text-[10px] font-bold tracking-[0.2em] uppercase mb-4 text-center lg:text-left">
-            HOW TO PARTICIPATE
-          </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight mb-12 text-center lg:text-left">
-            Four clear steps to take<br className="hidden lg:block"/> your position.
-          </h2>
-
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 text-left">
-            {/* Step 1 */}
-            <div className="lg:col-span-3 bg-[#EAEAEA] rounded-[32px] p-8 lg:p-10 flex flex-col justify-between min-h-[320px]">
-              <div className="flex justify-between items-start">
-                <span className="text-6xl font-bold text-[#C10202]/30">01</span>
-                <span className="px-3 py-1 bg-white/80 text-gray-700 text-[10px] font-bold rounded-full">Step 1 of 4</span>
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                  Sign Up
-                </h3>
-                <p className="text-sm text-gray-600 leading-relaxed mb-8 max-w-sm">
-                  Create your LOTUS Wealth account in minutes and verify your details securely.
-                </p>
-                <div className="flex items-center gap-2 text-xs text-gray-600 font-medium">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#C10202]"></div>
-                  A quick, secure start
-                </div>
-              </div>
-            </div>
-
-            {/* Step 2 */}
-            <div className="lg:col-span-2 bg-[#1C0303] rounded-[32px] p-8 lg:p-10 flex flex-col justify-between min-h-[320px]">
-              <div className="flex justify-between items-start">
-                <span className="text-6xl font-bold text-[#C10202]/40">02</span>
-                <span className="px-3 py-1 bg-white/10 text-white/90 text-[10px] font-bold rounded-full">Step 2 of 4</span>
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-white mb-4">
-                  Open the offer page
-                </h3>
-                <p className="text-sm text-gray-300 leading-relaxed mb-8 max-w-sm">
-                  From your LOTUS Wealth dashboard, use the dedicated link to reach the Dangote IPO offer page.
-                </p>
-                <div className="flex items-center gap-2 text-xs text-gray-300 font-medium">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#C10202]"></div>
-                  Everything in one place
-                </div>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="lg:col-span-2 bg-[#C10202] rounded-[32px] p-8 lg:p-10 flex flex-col justify-between min-h-[320px] shadow-sm">
-              <div className="flex justify-between items-start">
-                <span className="text-6xl font-bold text-black/20">03</span>
-                <span className="px-3 py-1 bg-black/15 text-white text-[10px] font-bold rounded-full">Step 3 of 4</span>
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-white mb-4">
-                  Review the Offer Documents
-                </h3>
-                <p className="text-sm text-white/90 leading-relaxed mb-8 max-w-sm">
-                  Read the prospectus and other offer materials to understand the investment opportunity and associated risks.
-                </p>
-                <div className="flex items-center gap-2 text-xs text-white/90 font-medium">
-                  <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
-                  Review before you invest
-                </div>
-              </div>
-            </div>
-
-            {/* Step 4 */}
-            <div className="lg:col-span-3 bg-[#EAEAEA] rounded-[32px] p-8 lg:p-10 flex flex-col justify-between min-h-[320px]">
-              <div className="flex justify-between items-start">
-                <span className="text-6xl font-bold text-[#C10202]/30">04</span>
-                <span className="px-3 py-1 bg-white/80 text-gray-700 text-[10px] font-bold rounded-full">Step 4 of 4</span>
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                  Choose Your Shares
-                </h3>
-                <p className="text-sm text-gray-600 leading-relaxed mb-8 max-w-sm">
-                  Select how many shares you'd like to purchase and submit your application securely through LOTUS Wealth.
-                </p>
-                <div className="flex items-center gap-2 text-xs text-gray-600 font-medium">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#C10202]"></div>
-                  You stay in control
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HowToParticipateSection />
 
       {/* ------------------------------------------------------------- */}
       {/* SECTION: BEFORE YOU INVEST                                    */}
@@ -666,10 +582,10 @@ export default function App() {
                 Before You Invest
               </p>
               <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 tracking-tight leading-tight">
-                Understand the offer <br className="hidden lg:block" /> and the risks.
+                Understand the Offer & the Risks
               </h2>
               <p className="text-base text-gray-600 leading-relaxed max-w-md">
-                An IPO is an investment, not a savings product. Read all offer documents carefully and seek independent advice if you are unsure.
+                An IPO is an investment, not a savings product. Before investing, please read the Prospectus carefully and seek independent professional advice if you are uncertain about the suitability of the investment.
               </p>
               
               <div className="pt-4">
@@ -688,28 +604,24 @@ export default function App() {
             {/* Right Risk Box */}
             <div className="bg-[#FFF8F8] rounded-2xl p-8 sm:p-10">
               <h3 className="text-lg font-bold text-gray-900 mb-6">
-                Important risk information
+                Important Risk Information
               </h3>
               <ul className="space-y-4 text-sm text-gray-700 list-disc list-outside ml-5 marker:text-gray-400">
+                <li className="pl-1">Allotment is not guaranteed and you may receive fewer shares than the number applied for.</li>
+                <li className="pl-1">Applications submitted through LOTUS Wealth are processed through CardinalStone Securities.</li>
+                <li className="pl-1">To be attributed to LOTUS Wealth, applications must be submitted through the designated application channel.</li>
+                <li className="pl-1">The market price of the shares may fall below the offer price after listing.</li>
                 <li className="pl-1">Your capital is at risk and you may lose some or all of your investment.</li>
-                <li className="pl-1">The shares may trade below the offer price after listing.</li>
-                <li className="pl-1">Allotment is not guaranteed and may differ from the amount applied for.</li>
-                <li className="pl-1">Past or projected performance does not guarantee future returns.</li>
-                <li className="pl-1">Your application on LOTUS Wealth is being submitted through CardinalStone Securities.</li>
-                <li className="pl-1">Applications must be complete, successful and submitted through the designated route to be attributed to Lotus Wealth.</li>
+                <li className="pl-1">Past performance is not a reliable indicator of future performance.</li>
+                <li className="pl-1">The Prospectus is the primary source of information relating to the Offer and shall prevail in the event of any inconsistency with information on this page.</li>
               </ul>
-              <div className="mt-8 pt-6 border-t border-red-100">
-                <p className="text-xs text-gray-500 leading-relaxed">
-                  The prospectus and official offer documents take precedence over this page if any information differs.
-                </p>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* SECTION: YOUR INVESTMENT JOURNEY - Download App & Waitlist    */}
+      {/* SECTION: START YOUR INVESTMENT JOURNEY - Download App & Waitlist */}
       {/* ------------------------------------------------------------- */}
       <section
         id="about-lotus"
@@ -728,7 +640,7 @@ export default function App() {
               <div className="lg:col-span-7 order-1 lg:order-2 space-y-6">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-1.5">
-                    Your Investment Journey
+                    Start Your Investment Journey
                   </p>
                   <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-tight">
                     LOTUS Wealth
@@ -793,7 +705,7 @@ export default function App() {
             <div className="space-y-4 max-w-md">
               <LotusLogo variant="wealth" theme="light" size="md" />
               <p className="text-xs text-gray-500 leading-relaxed">
-                LOTUS Wealth is an ethical, digital investment platform operated by LOTUS Capital Limited / LOTUS Financial Services Limited.
+                LOTUS Wealth is an ethical, digital investment platform operated by LOTUS Financial Services Limited.
               </p>
             </div>
 
@@ -802,18 +714,48 @@ export default function App() {
               <p className="font-bold text-gray-900 text-sm">LOTUS HOUSE</p>
               <p>182 Awolowo Road, Falomo, Ikoyi, Lagos, Nigeria</p>
               <p className="text-gray-500">0908 705 8405 • 0908 705 8406 • 0908 705 8409</p>
+              <p className="flex items-center md:justify-end gap-1.5">
+                <span className="text-gray-500">WhatsApp:</span>
+                <a
+                  href={WHATSAPP_SUPPORT_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-emerald-700 font-semibold hover:underline inline-flex items-center gap-1"
+                >
+                  +234 708 110 8201
+                </a>
+              </p>
               <p>
                 <a href="mailto:info@lotuscapitallimited.com" className="text-[#C10202] font-semibold hover:underline">
                   info@lotuscapitallimited.com
                 </a>
               </p>
+              <div className="pt-2 flex items-center md:justify-end gap-3 text-xs">
+                <a
+                  href={LOTUS_LOGIN_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-gray-700 hover:text-[#C10202] underline"
+                >
+                  Client Sign In
+                </a>
+                <span>•</span>
+                <a
+                  href={LOTUS_REGISTER_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-gray-700 hover:text-[#C10202] underline"
+                >
+                  Create Account
+                </a>
+              </div>
             </div>
           </div>
 
           {/* Bottom disclaimer and copyright */}
           <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-gray-500">
             <p className="text-center sm:text-left max-w-xl">
-              LOTUS Wealth is registered and regulated by the Securities and Exchange Commission (SEC), Nigeria. Investing carries risk of capital loss.
+              Lotus Wealth is a licensed digital sub-brokerage platform. Applications submitted through Lotus Wealth are processed by its sponsoring broker, CardinalStone Securities Ltd.
             </p>
             <p className="shrink-0 text-center sm:text-right">
               © 2026 LOTUS Group. All rights reserved.
@@ -841,30 +783,43 @@ export default function App() {
         onClose={() => setIsAboutLotusModalOpen(false)}
       />
 
-      {/* Floating Contact Support Bubble */}
-      <a
-        href="mailto:support@lotuswealth.com?subject=Inquiry%20about%20Dangote%20IPO&body=Hello%20Lotus%20Wealth%20Support%2C%0A%0AI%20am%20interested%20in%20the%20Dangote%20Refinery%20IPO%20and%20have%20the%20following%20questions%3A%0A%0A"
-        className="fixed bottom-6 left-6 p-3.5 bg-gray-900 text-white rounded-full shadow-xl hover:bg-black transition-all hover:-translate-y-1 z-50 flex items-center justify-center gap-2 group border border-gray-700"
-        aria-label="Contact Support"
-      >
-        <div className="w-5 h-5 flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-        </div>
-        <span className="text-xs font-semibold max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 whitespace-nowrap opacity-0 group-hover:opacity-100 group-hover:ml-1">
-          Support
-        </span>
-      </a>
+      {/* Floating Action Controls on the Right */}
+      <div className="fixed bottom-4 right-3 sm:bottom-6 sm:right-6 z-50 flex flex-col items-center gap-2.5">
+        {/* Floating Back to Top Button */}
+        {showTopButton && (
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="w-10 h-10 sm:w-11 sm:h-11 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 rounded-full shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5 flex items-center justify-center focus:outline-none active:scale-95"
+            aria-label="Back to Top"
+          >
+            <ChevronUp className="w-5 h-5 text-[#C10202]" />
+          </button>
+        )}
 
-      {/* Floating Back to Top Button */}
-      {showTopButton && (
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-6 right-6 p-3 bg-[#C10202] text-white rounded-full shadow-xl hover:bg-[#a00202] transition-all hover:-translate-y-1 z-50 flex items-center justify-center focus:outline-none"
-          aria-label="Back to Top"
+        {/* Floating WhatsApp Live Chat Support (Vertical & Mobile Responsive) */}
+        <a
+          href={WHATSAPP_SUPPORT_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative p-2 sm:py-2.5 sm:px-3 bg-[#25D366] hover:bg-[#20ba59] active:scale-95 text-white rounded-2xl shadow-2xl transition-all hover:-translate-y-1 flex flex-col items-center justify-center gap-1 group border border-white/30 cursor-pointer min-w-[56px] sm:min-w-[64px]"
+          aria-label="Chat with Support on WhatsApp (+234 708 110 8201)"
         >
-          <ChevronUp className="w-5 h-5" />
-        </button>
-      )}
+          {/* Active online pulse dot */}
+          <span className="absolute -top-1 -right-1 flex h-3 w-3">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-80"></span>
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-300 border-2 border-[#25D366]"></span>
+          </span>
+
+          <div className="w-6 h-6 flex items-center justify-center shrink-0">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+              <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.8 14.16c-.24.68-1.4 1.25-1.92 1.33-.51.08-1.18.11-1.91-.12-.45-.14-1.04-.34-1.79-.67-3.17-1.38-5.23-4.59-5.39-4.8-.16-.21-1.28-1.7-1.28-3.25 0-1.54.81-2.3 1.1-2.6.29-.3.64-.37.85-.37.21 0 .43 0 .62.01.2.01.47-.08.73.56.27.65.91 2.22.99 2.38.08.16.14.35.03.56-.11.22-.16.35-.32.54-.16.19-.34.42-.49.57-.16.16-.33.34-.14.66.19.32.84 1.38 1.8 2.23 1.24 1.1 2.28 1.44 2.6 1.6.32.16.51.14.7-.08.19-.22.81-.94 1.03-1.26.21-.32.43-.27.73-.16.29.11 1.87.88 2.19 1.04.32.16.54.24.62.38.08.14.08.8-.16 1.48z"/>
+            </svg>
+          </div>
+          <span className="text-[9px] sm:text-[10px] font-bold tracking-tight text-center leading-tight uppercase">
+            WhatsApp<br />Support
+          </span>
+        </a>
+      </div>
     </div>
   );
 }

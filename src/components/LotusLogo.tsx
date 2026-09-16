@@ -26,13 +26,15 @@ export const LotusLogo: React.FC<LotusLogoProps> = ({
     return (
       <div className={`inline-flex items-center select-none ${className} ${theme === 'dark' ? 'bg-white/90 p-1.5 rounded' : ''}`}>
         <img
-          src="/Lotus%20Wealth%20Logo.jpeg"
+          src="/Lotus%20Wealth%20Logo.png"
           alt="Lotus Wealth"
           loading="lazy"
           className={`${heights[size]} w-auto object-contain`}
           onError={(e) => {
             const target = e.currentTarget;
-            if (!target.src.includes('lotus-wealth-logo.jpeg')) {
+            if (target.src.includes('Lotus%20Wealth%20Logo.png')) {
+              target.src = '/Lotus%20Wealth%20Logo.jpeg';
+            } else if (target.src.includes('Lotus%20Wealth%20Logo.jpeg')) {
               target.src = '/lotus-wealth-logo.jpeg';
             } else {
               setImgError(true);
